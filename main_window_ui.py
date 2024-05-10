@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
 "background-color: #495057;\n"
 "}\n"
 "\n"
-"#title, QLabel {\n"
+"#username, #title {\n"
 "background: transparent;\n"
 "color: #E9ECEF;\n"
 "}\n"
@@ -88,9 +88,9 @@ class Ui_MainWindow(object):
 "QTableView::section {\n"
 "background-color: #CED4DA;\n"
 "height: 50px;\n"
-"color: white;\n"
-""
-                        "font-size: 12px;\n"
+"color: whit"
+                        "e;\n"
+"font-size: 12px;\n"
 "}\n"
 "\n"
 "QTableView::item {\n"
@@ -318,7 +318,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"CryptoKeyPro", None))
-        self.username.setText(QCoreApplication.translate("MainWindow", u"udovkinp@gmail.com", None))
+        self.username.setText(QCoreApplication.translate("MainWindow", u"your@gmail.com", None))
         self.newKeyBtn.setText(QCoreApplication.translate("MainWindow", u"New Key", None))
         self.editBtn.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.deleteBtn.setText(QCoreApplication.translate("MainWindow", u"Delete", None))

@@ -147,7 +147,7 @@ boarder: none;
           </font>
          </property>
          <property name="text">
-          <string>udovkinp@gmail.com</string>
+          <string>your@gmail.com</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

@@ -32,7 +32,6 @@ class Account:
             if not check:
                 self.email = _login
                 self.code = gen_code(4)
-                print(self.code)
                 self.mail.send_email(f"Код подтверждения: {self.code}", "Подтверждение почты", self.email)
                 return True, 'Код отправлен'
             else:
@@ -48,7 +47,6 @@ class Account:
             if check:
                 self.email = _login
                 self.code = gen_code(6)
-                print(self.code)
                 self.mail.send_email(f"Код для сброса пароля: {self.code}", "Сброс пароля", self.email)
                 return True, 'Код отправлен'
             else:
@@ -79,7 +77,6 @@ class Account:
                                          f'Ваш логин: {self.email}\nПароль: {pss}', "Вы в системе!", self.email)
                 else:
                     user = self.user_data.get_user_with_login(self.email)
-                    print(user)
                     id = user['id']
                     self.user_data.update_pass(id, _data)
                     self.mail.send_email('Ваш пароль был изменен.\n'
@@ -99,10 +96,3 @@ class Account:
                 self.access = True
 
         return self.access
-
-    def send_pass(self):
-        log_doc = self.user_data.get_document_with_login(users, self.email)
-        if is_login(self.email) and log_doc is not None:
-            self.mail.send_email(f"Выш пароль: {log_doc['password']}", "Выгрузка паролей", self.email)
-        else:
-            print('Данный пользователь не найден')
