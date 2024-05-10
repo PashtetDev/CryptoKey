@@ -1,6 +1,6 @@
 import random
-from mail import Mail
-from connection import Data
+from libs.mail import Mail
+from libs.connection import Data
 
 
 users = 'accounts'

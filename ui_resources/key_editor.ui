@@ -191,12 +191,12 @@ color: #E9ECEF;
         </property>
         <item>
          <property name="text">
-          <string>Simple</string>
+          <string>Original</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Text</string>
+          <string>Simple</string>
          </property>
         </item>
         <item>

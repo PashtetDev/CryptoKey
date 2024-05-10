@@ -3,11 +3,9 @@ import sys
 import os
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
-import registration_ui
-from main_window_ui import Ui_MainWindow
-import login_ui
-import key_editor_ui
-from account import Account
+from libs.main_window_ui import Ui_MainWindow
+from libs import login_ui, registration_ui, key_editor_ui
+from libs.account import Account
 
 
 translate1 = {
@@ -135,7 +133,7 @@ class KeyManager(QMainWindow):
         self.login_window.resetPassBtn.clicked.connect(self.open_registration_window)
 
     def get_current_user(self):
-        with open(f'{os.path.dirname(__file__)}\\data\\current_user', "r") as f:
+        with open(f'{os.path.dirname(__file__)}\\libs\\data\\current_user', "r") as f:
             data = f.read()
             doc = eval(data)
             if doc['login'] != '':

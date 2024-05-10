@@ -186,8 +186,8 @@ class Ui_dialog(object):
         self.titleEdit.setText("")
         self.titleEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"Title", None))
         self.stringEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"Your string", None))
-        self.modelEdit.setItemText(0, QCoreApplication.translate("dialog", u"Simple", None))
-        self.modelEdit.setItemText(1, QCoreApplication.translate("dialog", u"Text", None))
+        self.modelEdit.setItemText(0, QCoreApplication.translate("dialog", u"Original", None))
+        self.modelEdit.setItemText(1, QCoreApplication.translate("dialog", u"Simple", None))
         self.modelEdit.setItemText(2, QCoreApplication.translate("dialog", u"Strong", None))
 
 #if QT_CONFIG(tooltip)
