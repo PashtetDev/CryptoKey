@@ -23,14 +23,14 @@ class Ui_dialog(object):
     def setupUi(self, dialog):
         if not dialog.objectName():
             dialog.setObjectName(u"dialog")
-        dialog.resize(200, 231)
+        dialog.resize(220, 231)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(dialog.sizePolicy().hasHeightForWidth())
         dialog.setSizePolicy(sizePolicy)
-        dialog.setMinimumSize(QSize(200, 0))
-        dialog.setMaximumSize(QSize(200, 231))
+        dialog.setMinimumSize(QSize(220, 0))
+        dialog.setMaximumSize(QSize(220, 231))
         dialog.setStyleSheet(u"* {\n"
 "border: none;\n"
 "background-color: transparent;\n"
@@ -184,11 +184,11 @@ class Ui_dialog(object):
     def retranslateUi(self, dialog):
         dialog.setWindowTitle(QCoreApplication.translate("dialog", u"KeyEditor", None))
         self.titleEdit.setText("")
-        self.titleEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"Title", None))
-        self.stringEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"Your string", None))
-        self.modelEdit.setItemText(0, QCoreApplication.translate("dialog", u"Original", None))
-        self.modelEdit.setItemText(1, QCoreApplication.translate("dialog", u"Simple", None))
-        self.modelEdit.setItemText(2, QCoreApplication.translate("dialog", u"Strong", None))
+        self.titleEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435", None))
+        self.stringEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"\u0412\u0445\u043e\u0434\u043d\u0430\u044f \u0441\u0442\u0440\u043e\u043a\u0430", None))
+        self.modelEdit.setItemText(0, QCoreApplication.translate("dialog", u"\u041d\u0430\u0447\u0430\u043b\u044c\u043d\u044b\u0439", None))
+        self.modelEdit.setItemText(1, QCoreApplication.translate("dialog", u"\u041f\u0440\u043e\u0441\u0442\u043e\u0439", None))
+        self.modelEdit.setItemText(2, QCoreApplication.translate("dialog", u"\u0421\u0438\u043b\u044c\u043d\u044b\u0439", None))
 
 #if QT_CONFIG(tooltip)
         self.modelEdit.setToolTip("")
@@ -197,9 +197,9 @@ class Ui_dialog(object):
         self.modelEdit.setStatusTip("")
 #endif // QT_CONFIG(statustip)
         self.modelEdit.setCurrentText("")
-        self.modelEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"Choose generative model", None))
-        self.password.setText(QCoreApplication.translate("dialog", u"Password", None))
-        self.generateBtn.setText(QCoreApplication.translate("dialog", u"Generate", None))
-        self.saveBtn.setText(QCoreApplication.translate("dialog", u"Save", None))
+        self.modelEdit.setPlaceholderText(QCoreApplication.translate("dialog", u"\u0412\u044b\u0431\u0435\u0440\u0435\u0442\u0435 \u043c\u043e\u0434\u0435\u043b\u044c \u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u0438", None))
+        self.password.setText(QCoreApplication.translate("dialog", u"\u041f\u0430\u0440\u043e\u043b\u044c", None))
+        self.generateBtn.setText(QCoreApplication.translate("dialog", u"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
+        self.saveBtn.setText(QCoreApplication.translate("dialog", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
     # retranslateUi
 

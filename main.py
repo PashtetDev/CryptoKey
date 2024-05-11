@@ -8,7 +8,6 @@ from libs import login_ui, registration_ui, key_editor_ui, crypto
 from libs.account import Account
 
 
-
 def write_current_user(_login, pss):
     with open(f'{os.path.dirname(__file__)}\\libs\\data\\current_user', "w") as f:
         data = {'login': f'{_login}', 'password': f'{pss}'}
@@ -25,7 +24,6 @@ class KeyManager(QMainWindow):
         super(KeyManager, self).__init__()
         self.col = None
         self.current_id = None
-        self.open_login_window()
         self.user = Account()
         self.get_current_user()
 
@@ -36,9 +34,9 @@ class KeyManager(QMainWindow):
         else:
             model = self.editor_window.modelEdit.currentText()
 
-            if model == 'Simple':
+            if model == 'Простой':
                 pss = crypto.simple_alg(input_str)
-            elif model == 'Strong':
+            elif model == 'Сильный':
                 pss = crypto.strong_alg(input_str)
             else:
                 pss = input_str
@@ -58,41 +56,42 @@ class KeyManager(QMainWindow):
             doc = eval(data)
             if doc['login'] != '':
                 if self.user.login(doc['login'], doc['password']):
-                    self.user.email = doc['login']
-                    self.col = self.user.user_data.get_user_with_login(self.user.email)['collection']
+                    self.user.user_data.login = doc['login']
+                    self.col = self.user.user_data.get_user_with_login()['collection']
                     self.open_main_window(doc['login'])
                 else:
-                    warning_notification('The password or username do not match!')
+                    warning_notification("Пароль или логин не совпадает!")
+            else:
+                self.open_login_window()
 
     def login(self):
         _login = self.login_window.login.text()
         pss = self.login_window.pss.text()
         write_current_user('', '')
         if len(_login) == 0 or len(pss) == 0:
-            warning_notification('An empty line!')
+            warning_notification('Пустая строка!')
         else:
             if self.user.login(_login, pss):
-                self.user.email = _login
-                self.col = self.user.user_data.get_user_with_login(self.user.email)['collection']
+                self.user.user_data.login = _login
+                self.col = self.user.user_data.get_user_with_login()['collection']
                 self.open_main_window(_login)
                 write_current_user(_login, pss)
             else:
-                warning_notification("The password or username do not match!")
+                warning_notification("Пароль или логин не совпадает!")
 
     def open_registration_window(self):
         sender = self.sender()
         self.new_window = QtWidgets.QDialog()
         self.reg_window = registration_ui.Ui_dialog()
 
-        if sender.text() == 'Sign up':
+        if sender.text() == 'Регистрация':
             self.reg_window.setupUi(self.new_window)
 
             self.reg_window.sendCodeBtn.clicked.connect(self.send_code)
         else:
             self.reg_window.setupUi(self.new_window)
-            self.reg_window.label.setText("Reset password")
-            self.reg_window.regBtn.setText("Сhange password")
-
+            self.reg_window.label.setText("Сброс пароля")
+            self.reg_window.regBtn.setText("Сменить пароль")
             self.reg_window.sendCodeBtn.clicked.connect(self.send_reset_code)
 
         self.reg_window.checkCodeBtn.clicked.connect(self.check_code)
@@ -100,10 +99,12 @@ class KeyManager(QMainWindow):
         self.new_window.show()
 
     def send_code(self):
-        status, msg = self.user.send_code(self.reg_window.email.text())
+        email = self.reg_window.email.text()
+        self.user.user_data.login = email
+        status, msg = self.user.send_code(email)
         if not status:
             warning_notification(msg)
-            self.login_window.login.setText(self.reg_window.email.text())
+            self.login_window.login.setText(email)
             self.new_window.close()
 
     def send_reset_code(self):
@@ -123,13 +124,12 @@ class KeyManager(QMainWindow):
             self.reg_window.codeInput.setReadOnly(True)
 
     def registration(self):
-        mode = self.sender().text() == "Registration"
-
+        mode = self.sender().text() == "Зарегистрироваться"
         if self.user.code_chck:
             status, msg = self.user.registration(self.reg_window.pss.text(), self.reg_window.confPss.text(), mode)
             if status:
                 self.new_window.close()
-                self.login_window.login.setText(str(self.user.email))
+                self.login_window.login.setText(str(self.user.user_data.login))
             else:
                 warning_notification(msg)
         else:
@@ -172,7 +172,7 @@ class KeyManager(QMainWindow):
         self.editor_window.setupUi(self.new_window)
         self.editor_window.generateBtn.clicked.connect(self.gen_pss)
 
-        if sender.text() == 'New Key':
+        if sender.text() == 'Новый пароль':
             self.editor_window.saveBtn.clicked.connect(self.add_key)
             self.new_window.show()
         else:
@@ -190,7 +190,7 @@ class KeyManager(QMainWindow):
         if len(self.editor_window.stringEdit.text()) == 0 or len(self.editor_window.titleEdit.text()) == 0:
             warning_notification("Обнаружены пустые строки!")
         else:
-            if self.editor_window.password.text() == "Password":
+            if self.editor_window.password.text() == "Пароль":
                 warning_notification("Сгенерируйте пароль!")
             else:
                 data = {
@@ -198,17 +198,17 @@ class KeyManager(QMainWindow):
                     'title': f'{self.editor_window.titleEdit.text()}',
                     'collection': f'{self.col}'
                 }
-                self.user.user_data.create_key(data, self.user.email)
+                self.user.user_data.create_key(data)
                 self.new_window.close()
                 self.view_data()
 
     def update_key(self):
-        data = {
+        new_data = {
             'password': f'{self.editor_window.password.text()}',
             'title': f'{self.editor_window.titleEdit.text()}',
             'collection': f'{self.col}'
         }
-        self.user.user_data.update_existing_key(self.current_id, data)
+        self.user.user_data.update_existing_key(self.current_id, new_data)
         self.new_window.close()
         self.view_data()
 
@@ -217,20 +217,20 @@ class KeyManager(QMainWindow):
         for key in self.keys:
             self.user.user_data.delete_key(key['id'])
 
-        id = self.user.user_data.get_user_with_login(self.user.email)['id']
-        self.user.user_data.delete_user(id, self.col)
+        self.user.user_data.delete_user()
         self.quit()
 
     def quit(self):
         write_current_user('', '')
-        self.open_login_window()
-        self.user.email = None
         self.col = None
+        self.user.user_data.login = ''
+        self.current_id = None
+        self.get_current_user()
 
     def view_data(self):
         col = self.col
         if col is not None:
-            self.keys = self.user.user_data.get_all_docs(col)
+            self.keys = self.user.user_data.get_all_docs()
 
             row = 0
             self.ui_main.tableWidget.setRowCount(len(self.keys))
@@ -240,13 +240,13 @@ class KeyManager(QMainWindow):
                 row += 1
 
     def download_data(self):
-        data = self.user.user_data.get_all_docs(self.col)
+        data = self.user.user_data.get_all_docs()
         msg = "Список паролей:\n"
 
         for key in data:
             msg += f'Название: {key["title"]}, Пароль: {key["password"]}\n'
 
-        self.user.mail.send_email(msg, "Выгрузка паролей", self.user.email)
+        self.user.mail.send_email(msg, "Выгрузка паролей", self.user.user_data.login)
 
 
 if __name__ == "__main__":

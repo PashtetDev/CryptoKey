@@ -259,11 +259,7 @@ class Ui_MainWindow(object):
         self.quitBtn.setObjectName(u"quitBtn")
         sizePolicy4.setHeightForWidth(self.quitBtn.sizePolicy().hasHeightForWidth())
         self.quitBtn.setSizePolicy(sizePolicy4)
-        font3 = QFont()
-        font3.setFamilies([u"Segoe UI Semibold"])
-        font3.setPointSize(14)
-        font3.setBold(True)
-        self.quitBtn.setFont(font3)
+        self.quitBtn.setFont(font2)
 
         self.verticalLayout_4.addWidget(self.quitBtn)
 
@@ -296,11 +292,11 @@ class Ui_MainWindow(object):
         sizePolicy6.setVerticalStretch(0)
         sizePolicy6.setHeightForWidth(self.title.sizePolicy().hasHeightForWidth())
         self.title.setSizePolicy(sizePolicy6)
-        font4 = QFont()
-        font4.setFamilies([u"Segoe UI Semibold"])
-        font4.setPointSize(20)
-        font4.setBold(True)
-        self.title.setFont(font4)
+        font3 = QFont()
+        font3.setFamilies([u"Segoe UI Semibold"])
+        font3.setPointSize(20)
+        font3.setBold(True)
+        self.title.setFont(font3)
         self.title.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.title)
@@ -374,18 +370,18 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"CryptoKeyPro", None))
-        self.username.setText(QCoreApplication.translate("MainWindow", u"your@mail.com", None))
-        self.newKeyBtn.setText(QCoreApplication.translate("MainWindow", u"New Key", None))
-        self.editBtn.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.deleteBtn.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.uploadBtn.setText(QCoreApplication.translate("MainWindow", u"Download data", None))
-        self.delAccButton.setText(QCoreApplication.translate("MainWindow", u"Delete account", None))
-        self.quitBtn.setText(QCoreApplication.translate("MainWindow", u"QUIT", None))
+        self.username.setText(QCoreApplication.translate("MainWindow", u"\u0442\u0432\u043e\u044f@\u043f\u043e\u0447\u0442\u0430.\u0440\u0443", None))
+        self.newKeyBtn.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u043f\u0430\u0440\u043e\u043b\u044c", None))
+        self.editBtn.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
+        self.deleteBtn.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
+        self.uploadBtn.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u043f\u0430\u0440\u043e\u043b\u0438", None))
+        self.delAccButton.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0430\u043a\u043a\u0430\u0443\u043d\u0442", None))
+        self.quitBtn.setText(QCoreApplication.translate("MainWindow", u"\u0412\u042b\u0419\u0422\u0418", None))
         self.title.setText(QCoreApplication.translate("MainWindow", u"CryptoKey", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0430\u0440\u043e\u043b\u044c", None));
-        self.selectedPss.setText(QCoreApplication.translate("MainWindow", u"selectedPassword", None))
+        self.selectedPss.setText(QCoreApplication.translate("MainWindow", u"\u0432\u044b\u0431\u0440\u0430\u043d\u043d\u044b\u0439 \u043f\u0430\u0440\u043e\u043b\u044c", None))
     # retranslateUi
 

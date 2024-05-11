@@ -207,16 +207,16 @@ class Ui_dialog(object):
 
     def retranslateUi(self, dialog):
         dialog.setWindowTitle(QCoreApplication.translate("dialog", u"Setup", None))
-        self.label.setText(QCoreApplication.translate("dialog", u"Sign up", None))
+        self.label.setText(QCoreApplication.translate("dialog", u"\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044f", None))
         self.email.setText("")
         self.email.setPlaceholderText(QCoreApplication.translate("dialog", u"E-mail", None))
         self.emailCheck.setText("")
         self.codeInput.setText("")
-        self.codeInput.setPlaceholderText(QCoreApplication.translate("dialog", u"CODE", None))
-        self.sendCodeBtn.setText(QCoreApplication.translate("dialog", u"Send the CODE", None))
-        self.checkCodeBtn.setText(QCoreApplication.translate("dialog", u"Check the code", None))
-        self.pss.setPlaceholderText(QCoreApplication.translate("dialog", u"Password", None))
-        self.confPss.setPlaceholderText(QCoreApplication.translate("dialog", u"Confirm password", None))
-        self.regBtn.setText(QCoreApplication.translate("dialog", u"Registration", None))
+        self.codeInput.setPlaceholderText(QCoreApplication.translate("dialog", u"\u041a\u041e\u0414", None))
+        self.sendCodeBtn.setText(QCoreApplication.translate("dialog", u"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u041a\u041e\u0414", None))
+        self.checkCodeBtn.setText(QCoreApplication.translate("dialog", u"\u041f\u0440\u043e\u0432\u0435\u0440\u0438\u0442\u044c \u043a\u043e\u0434", None))
+        self.pss.setPlaceholderText(QCoreApplication.translate("dialog", u"\u041f\u0430\u0440\u043e\u043b\u044c", None))
+        self.confPss.setPlaceholderText(QCoreApplication.translate("dialog", u"\u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043f\u0430\u0440\u043e\u043b\u044c", None))
+        self.regBtn.setText(QCoreApplication.translate("dialog", u"\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c\u0441\u044f", None))
     # retranslateUi
 
