@@ -733,7 +733,7 @@ boarder: none;
              </font>
             </property>
             <property name="text">
-             <string>выбранный пароль</string>
+             <string>выбранный пароль для копирования</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>

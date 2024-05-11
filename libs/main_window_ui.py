@@ -382,6 +382,6 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0430\u0440\u043e\u043b\u044c", None));
-        self.selectedPss.setText(QCoreApplication.translate("MainWindow", u"\u0432\u044b\u0431\u0440\u0430\u043d\u043d\u044b\u0439 \u043f\u0430\u0440\u043e\u043b\u044c", None))
+        self.selectedPss.setText(QCoreApplication.translate("MainWindow", u"\u0432\u044b\u0431\u0440\u0430\u043d\u043d\u044b\u0439 \u043f\u0430\u0440\u043e\u043b\u044c \u0434\u043b\u044f \u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f", None))
     # retranslateUi
 
