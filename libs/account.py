@@ -1,13 +1,10 @@
 import random
+import libs.crypto as crypto
 from libs.mail import Mail
 from libs.connection import Data
 
 
 users = 'accounts'
-
-
-def gen_code(len):
-    return random.randint(10 ** len, 10 ** (len + 1) - 1)
 
 
 def is_login(_login):
@@ -31,7 +28,8 @@ class Account:
                 check = True
             if not check:
                 self.email = _login
-                self.code = gen_code(4)
+                self.code = crypto.gen_code(4)
+                print(self.code)
                 self.mail.send_email(f"Код подтверждения: {self.code}", "Подтверждение почты", self.email)
                 return True, 'Код отправлен'
             else:
@@ -46,7 +44,8 @@ class Account:
                 check = True
             if check:
                 self.email = _login
-                self.code = gen_code(6)
+                self.code = crypto.gen_code(6)
+                print(self.code)
                 self.mail.send_email(f"Код для сброса пароля: {self.code}", "Сброс пароля", self.email)
                 return True, 'Код отправлен'
             else:
@@ -91,6 +90,7 @@ class Account:
     def login(self, _login, pss):
         acc_doc = self.user_data.get_user_with_login(_login)
 
+        self.access = False
         if acc_doc is not None:
             if acc_doc['password'] == pss:
                 self.access = True

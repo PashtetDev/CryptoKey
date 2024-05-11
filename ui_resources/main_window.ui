@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>459</width>
+    <width>489</width>
     <height>396</height>
    </rect>
   </property>
@@ -15,6 +15,205 @@
     <width>0</width>
     <height>343</height>
    </size>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="128">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="128">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>33</red>
+        <green>37</green>
+        <blue>41</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="128">
+        <red>233</red>
+        <green>236</green>
+        <blue>239</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
   </property>
   <property name="font">
    <font>
@@ -28,14 +227,10 @@
   <property name="styleSheet">
    <string notr="true">* {
 border: none;
-background-color: transparent;
-background: transparent;
+background-color: #212529;
+color: #E9ECEF;
 padding: 0;
 margin: 0;
-}
-
-#centralwidget {
-background-color: #212529;
 }
 
 QPushButton {
@@ -68,32 +263,44 @@ background-color:  #b21e35;
 background-color:  #85182a;
 }
 
-#header, #mainBody, #person {
+#centralwidget{
+background-color: #212529;
+}
+
+#header, #mainBody, #person, #buttons {
 background-color: #495057;
 }
 
-#username, #title {
-background: transparent;
+#username, #title, #selectedPss{
+background-color: #495057;
 color: #E9ECEF;
 }
 
-QTableView {
-background-color: transparent;
+QTableWidget {
+background: transparent;
+background-color: #495057;
+color: black;
 }
 
-QTableView::section {
+QHeaderView {
+background: transparent;
+background-color: #495057;
+color: black;
+}
+
+QTableWidget::section {
 background-color: #CED4DA;
 height: 50px;
 color: white;
 font-size: 12px;
 }
 
-QTableView::item {
+QTableWidget::item {
 background-color: #CED4DA;
 boarder-style: none;
 }
 
-QTableView::item:selected {
+QTableWidget::item:selected {
 color: #FFF;
 background-color: #ADB5BD;
 boarder: none;
@@ -147,7 +354,7 @@ boarder: none;
           </font>
          </property>
          <property name="text">
-          <string>your@gmail.com</string>
+          <string>your@mail.com</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -438,7 +645,7 @@ boarder: none;
           </sizepolicy>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item alignment="Qt::AlignHCenter">
+          <item>
            <widget class="QTableWidget" name="tableWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
@@ -452,6 +659,9 @@ boarder: none;
             <property name="autoFillBackground">
              <bool>false</bool>
             </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
             <property name="horizontalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
@@ -461,14 +671,23 @@ boarder: none;
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
             </property>
+            <property name="showDropIndicator" stdset="0">
+             <bool>false</bool>
+            </property>
             <property name="dragDropOverwriteMode">
              <bool>false</bool>
+            </property>
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::NoDragDrop</enum>
             </property>
             <property name="selectionMode">
              <enum>QAbstractItemView::SingleSelection</enum>
             </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectItems</enum>
+            </property>
             <property name="textElideMode">
-             <enum>Qt::ElideLeft</enum>
+             <enum>Qt::ElideNone</enum>
             </property>
             <property name="showGrid">
              <bool>false</bool>
@@ -489,12 +708,39 @@ boarder: none;
              <property name="text">
               <string>Название</string>
              </property>
+             <property name="background">
+              <color>
+               <red>168</red>
+               <green>168</green>
+               <blue>168</blue>
+              </color>
+             </property>
             </column>
             <column>
              <property name="text">
               <string>Пароль</string>
              </property>
             </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="selectedPss">
+            <property name="font">
+             <font>
+              <family>Segoe UI Semibold</family>
+              <pointsize>10</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>selectedPassword</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>

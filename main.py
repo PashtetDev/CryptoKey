@@ -4,93 +4,13 @@ import os
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
 from libs.main_window_ui import Ui_MainWindow
-from libs import login_ui, registration_ui, key_editor_ui
+from libs import login_ui, registration_ui, key_editor_ui, crypto
 from libs.account import Account
 
 
-translate1 = {
-    'a': '@',
-    'b': '6',
-    'c': 'C',
-    'd': 'd',
-    'e': 'e',
-    'f': '5',
-    'g': 'g',
-    'h': 'H',
-    'i': '1',
-    'j': 'j',
-    'k': 'k',
-    'l': 'L',
-    'm': 'm',
-    'n': 'N',
-    'o': '0',
-    'p': 'p',
-    'q': 'Q',
-    's': 'S',
-    't': '2',
-    'u': 'u',
-    'v': 'V',
-    'w': 'www',
-    'x': 'X',
-    'y': 'Y',
-    'z': 'Z'
-}
-
-translate2 = {
-    'a': 'A',
-    'b': 'B',
-    'c': 'c',
-    'd': 'D',
-    'e': '3',
-    'f': 'F',
-    'g': 'G',
-    'h': 'h',
-    'i': 'i',
-    'j': 'J',
-    'k': 'K',
-    'l': 'l',
-    'm': 'M',
-    'n': 'n',
-    'o': '_o_',
-    'p': 'P',
-    'q': 'q',
-    's': 's',
-    't': 'T',
-    'u': 'u',
-    'v': 'v',
-    'w': 'W',
-    'x': 'x',
-    'y': 'y',
-    'z': 'z'
-}
-
-
-def strong_alg(string):
-    pss = string.lower()
-    new_pss = ''
-    for a in pss:
-        if a in translate1 and a in translate2:
-            if random.randint(0, 2) == 0:
-                new_pss += translate1[a]
-            else:
-                new_pss += translate2[a]
-        else:
-            new_pss += a
-            if random.randint(0, 5) >= 4:
-                new_pss += '_'
-    if len(new_pss) < 12:
-        power = 11 - len(new_pss)
-        new_pss += str(random.randint(10 ** power, 10 ** (power + 1) - 1))
-    return new_pss
-
-
-def simple_alg(string):
-    power = random.randint(3, 8)
-    return string + str(random.randint(10 ** power, 10 ** (power + 1) - 1))
-
 
 def write_current_user(_login, pss):
-    with open(f'{os.path.dirname(__file__)}\\data\\current_user', "w") as f:
+    with open(f'{os.path.dirname(__file__)}\\libs\\data\\current_user', "w") as f:
         data = {'login': f'{_login}', 'password': f'{pss}'}
         print(str(data), file=f)
 
@@ -117,9 +37,9 @@ class KeyManager(QMainWindow):
             model = self.editor_window.modelEdit.currentText()
 
             if model == 'Simple':
-                pss = simple_alg(input_str)
+                pss = crypto.simple_alg(input_str)
             elif model == 'Strong':
-                pss = strong_alg(input_str)
+                pss = crypto.strong_alg(input_str)
             else:
                 pss = input_str
 
@@ -147,14 +67,15 @@ class KeyManager(QMainWindow):
     def login(self):
         _login = self.login_window.login.text()
         pss = self.login_window.pss.text()
+        write_current_user('', '')
         if len(_login) == 0 or len(pss) == 0:
             warning_notification('An empty line!')
         else:
             if self.user.login(_login, pss):
-                write_current_user(_login, pss)
                 self.user.email = _login
                 self.col = self.user.user_data.get_user_with_login(self.user.email)['collection']
                 self.open_main_window(_login)
+                write_current_user(_login, pss)
             else:
                 warning_notification("The password or username do not match!")
 
@@ -224,9 +145,17 @@ class KeyManager(QMainWindow):
         self.ui_main.delAccButton.clicked.connect(self.delete_account)
         self.ui_main.quitBtn.clicked.connect(self.quit)
         self.ui_main.uploadBtn.clicked.connect(self.download_data)
+        self.ui_main.tableWidget.clicked.connect(self.write_selected_pss)
         self.ui_main.username.setText(user)
 
         self.view_data()
+
+    def write_selected_pss(self):
+        if len(self.ui_main.tableWidget.selectedItems()) > 0:
+            index = self.ui_main.tableWidget.selectedItems()[0].row()
+            self.ui_main.selectedPss.setText(self.keys[index]['password'])
+        else:
+            self.ui_main.selectedPss.setText("")
 
     def delete_current_key(self):
         if len(self.ui_main.tableWidget.selectedItems()) > 0:
@@ -269,7 +198,7 @@ class KeyManager(QMainWindow):
                     'title': f'{self.editor_window.titleEdit.text()}',
                     'collection': f'{self.col}'
                 }
-                self.user.user_data.create_key(data)
+                self.user.user_data.create_key(data, self.user.email)
                 self.new_window.close()
                 self.view_data()
 

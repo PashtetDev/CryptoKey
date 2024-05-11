@@ -16,30 +16,61 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
-    QLabel, QLayout, QMainWindow, QPushButton,
-    QSizePolicy, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget)
+    QLabel, QLayout, QLineEdit, QMainWindow,
+    QPushButton, QSizePolicy, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(459, 396)
+        MainWindow.resize(489, 396)
         MainWindow.setMinimumSize(QSize(0, 343))
+        palette = QPalette()
+        brush = QBrush(QColor(233, 236, 239, 255))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        brush1 = QBrush(QColor(33, 37, 41, 255))
+        brush1.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Button, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette.setBrush(QPalette.Active, QPalette.Base, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Window, brush1)
+        brush2 = QBrush(QColor(233, 236, 239, 128))
+        brush2.setStyle(Qt.SolidPattern)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush2)
+#endif
+        palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.Button, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.Base, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush2)
+#endif
+        palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.Base, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush2)
+#endif
+        MainWindow.setPalette(palette)
         font = QFont()
         font.setFamilies([u"Segoe UI Light"])
         font.setPointSize(12)
         MainWindow.setFont(font)
         MainWindow.setStyleSheet(u"* {\n"
 "border: none;\n"
-"background-color: transparent;\n"
-"background: transparent;\n"
+"background-color: #212529;\n"
+"color: #E9ECEF;\n"
 "padding: 0;\n"
 "margin: 0;\n"
-"}\n"
-"\n"
-"#centralwidget {\n"
-"background-color: #212529;\n"
 "}\n"
 "\n"
 "QPushButton {\n"
@@ -72,33 +103,45 @@ class Ui_MainWindow(object):
 "background-color:  #85182a;\n"
 "}\n"
 "\n"
-"#header, #mainBody, #person {\n"
+"#centralwidget{\n"
+"background-color: #212529;\n"
+"}\n"
+"\n"
+"#header, #mainBody, #person, #buttons {\n"
 "background-color: #495057;\n"
 "}\n"
 "\n"
-"#username, #title {\n"
-"background: transparent;\n"
+"#username, #title, #selectedPss{\n"
+"background-color: #495057;\n"
 "color: #E9ECEF;\n"
 "}\n"
 "\n"
-"QTableView {\n"
-"background-color: transparent;\n"
+"QTableWidget {\n"
+"background: transparent;\n"
+"background-color: #495057;\n"
+"color: black;\n"
 "}\n"
 "\n"
-"QTableView::section {\n"
+"QHeaderView {\n"
+"background: "
+                        "transparent;\n"
+"background-color: #495057;\n"
+"color: black;\n"
+"}\n"
+"\n"
+"QTableWidget::section {\n"
 "background-color: #CED4DA;\n"
 "height: 50px;\n"
-"color: whit"
-                        "e;\n"
+"color: white;\n"
 "font-size: 12px;\n"
 "}\n"
 "\n"
-"QTableView::item {\n"
+"QTableWidget::item {\n"
 "background-color: #CED4DA;\n"
 "boarder-style: none;\n"
 "}\n"
 "\n"
-"QTableView::item:selected {\n"
+"QTableWidget::item:selected {\n"
 "color: #FFF;\n"
 "background-color: #ADB5BD;\n"
 "boarder: none;\n"
@@ -278,6 +321,7 @@ class Ui_MainWindow(object):
         if (self.tableWidget.columnCount() < 2):
             self.tableWidget.setColumnCount(2)
         __qtablewidgetitem = QTableWidgetItem()
+        __qtablewidgetitem.setBackground(QColor(168, 168, 168));
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
@@ -289,19 +333,31 @@ class Ui_MainWindow(object):
         self.tableWidget.setSizePolicy(sizePolicy8)
         self.tableWidget.setLayoutDirection(Qt.LeftToRight)
         self.tableWidget.setAutoFillBackground(False)
+        self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.tableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.tableWidget.setAutoScroll(False)
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tableWidget.setProperty("showDropIndicator", False)
         self.tableWidget.setDragDropOverwriteMode(False)
+        self.tableWidget.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.tableWidget.setTextElideMode(Qt.ElideLeft)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectItems)
+        self.tableWidget.setTextElideMode(Qt.ElideNone)
         self.tableWidget.setShowGrid(False)
         self.tableWidget.setColumnCount(2)
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
         self.tableWidget.verticalHeader().setHighlightSections(False)
 
-        self.verticalLayout_2.addWidget(self.tableWidget, 0, Qt.AlignHCenter)
+        self.verticalLayout_2.addWidget(self.tableWidget)
+
+        self.selectedPss = QLineEdit(self.mainBody)
+        self.selectedPss.setObjectName(u"selectedPss")
+        self.selectedPss.setFont(font1)
+        self.selectedPss.setAlignment(Qt.AlignCenter)
+        self.selectedPss.setReadOnly(True)
+
+        self.verticalLayout_2.addWidget(self.selectedPss)
 
 
         self.verticalLayout_3.addWidget(self.mainBody)
@@ -318,7 +374,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"CryptoKeyPro", None))
-        self.username.setText(QCoreApplication.translate("MainWindow", u"your@gmail.com", None))
+        self.username.setText(QCoreApplication.translate("MainWindow", u"your@mail.com", None))
         self.newKeyBtn.setText(QCoreApplication.translate("MainWindow", u"New Key", None))
         self.editBtn.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.deleteBtn.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
@@ -330,5 +386,6 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0430\u0440\u043e\u043b\u044c", None));
+        self.selectedPss.setText(QCoreApplication.translate("MainWindow", u"selectedPassword", None))
     # retranslateUi
 

@@ -1,4 +1,5 @@
 import random
+import libs.crypto as crypto
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -18,10 +19,14 @@ class Data:
 
     def create_account(self, _data):
         _data['collection'] = f'col_{_data["login"]}_{random.randint(10 ** 4, 10 ** 5-1)}'
+        _data['protected_key'] = crypto.gen_key(12)
+        _data['password'] = crypto.lock_key(_data['password'], _data['protected_key'])
         doc_ref = self.db.collection(self.users).document()
         doc_ref.set(_data)
 
-    def create_key(self, _data):
+    def create_key(self, _data, login):
+        _hash = self.get_user_with_login(login)['protected_key']
+        _data['password'] = crypto.lock_key(_data['password'], _hash)
         doc_ref = self.db.collection(self.collection).document()
         doc_ref.set(_data)
 
@@ -40,23 +45,18 @@ class Data:
             self.db.collection(self.collection).stream()
         )
 
+        login = collection_name.split('_')[1]
+        _hash = self.get_user_with_login(login)['protected_key']
+
         documents_list = []
         for doc in docs:
             doc_data = doc.to_dict()
             if doc_data['collection'] == collection_name:
                 doc_data['id'] = doc.id
+                doc_data['password'] = crypto.unlock_key(doc_data['password'], _hash)
                 documents_list.append(doc_data)
 
         return documents_list
-
-    def get_document(self, collection_name, document_id):
-        doc_ref = self.db.collection(collection_name).document(document_id)
-        doc = doc_ref.get()
-        if doc.exists:
-            return doc.to_dict()
-        else:
-            print(f"Document '{document_id}' not found in collection '{collection_name}'.")
-            return None
 
     def get_user_with_login(self, login):
         docs = (
@@ -66,18 +66,8 @@ class Data:
             doc_data = doc.to_dict()
             doc_data['id'] = doc.id
             if doc_data['login'] == login:
-                return doc_data
-        return None
-
-    def get_document_with_login(self, login):
-        docs = (
-            self.db.collection(self.collection)
-            .stream()
-        )
-        for doc in docs:
-            doc_data = doc.to_dict()
-            doc_data['id'] = doc.id
-            if doc_data['login'] == login:
+                _hash = doc_data['protected_key']
+                doc_data['password'] = crypto.unlock_key(doc_data['password'], _hash)
                 return doc_data
         return None
 
