@@ -37,7 +37,7 @@ class Data:
 
     def create_account(self, _data):
         _data['collection'] = f'col_{_data["login"]}_{random.randint(10 ** 4, 10 ** 5-1)}'
-        _data['protected_key'] = crypto.gen_key(12)
+        _data['protected_key'] = crypto.gen_key(24)
         _hash = _data['protected_key']
         _data = convert_data(_data, _hash, True)
         doc_ref = self.db.collection(users).document()

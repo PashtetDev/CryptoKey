@@ -108,10 +108,11 @@ class KeyManager(QMainWindow):
             self.new_window.close()
 
     def send_reset_code(self):
-        status, msg = self.user.send_reset_code(self.reg_window.email.text())
+        email = self.reg_window.email.text()
+        status, msg = self.user.send_reset_code(email)
         if not status:
             warning_notification(msg)
-            self.login_window.login.setText(self.reg_window.email.text())
+            self.login_window.login.setText(email)
 
     def check_code(self):
         status, msg = self.user.code_check(self.reg_window.codeInput.text(), self.reg_window.email.text())

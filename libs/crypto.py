@@ -42,6 +42,7 @@ def gen_key(length):
 
 
 def gen_code(length):
+    length -= 1
     return random.randint(10 ** length, 10 ** (length + 1) - 1)
 
 
