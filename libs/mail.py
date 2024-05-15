@@ -20,5 +20,7 @@ class Mail:
             _msg['Subject'] = theme
             server.sendmail(self.sender, recipient, _msg.as_string())
             server.quit()
-        except Exception as _ex:
-            print(f'{_ex}')
+            return True, 'Код отправлен'
+        except Exception:
+            print(str(Exception))
+            return False, 'Что-то пошло не так. Проверьте почту'

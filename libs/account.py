@@ -28,8 +28,9 @@ class Account:
                 self.user_data.login = _login
                 self.code = crypto.gen_code(4)
                 print(self.code)
-                self.mail.send_email(f"Код подтверждения: {self.code}", "Подтверждение почты", self.user_data.login)
-                return True, 'Код отправлен'
+                status, msg = self.mail.send_email(f"Код подтверждения: {self.code}",
+                                                   "Подтверждение почты", self.user_data.login)
+                return status, msg
             else:
                 return False, "Такой пользователь существует!"
         else:
@@ -44,8 +45,10 @@ class Account:
             if check:
                 self.code = crypto.gen_code(6)
                 print(self.code)
-                self.mail.send_email(f"Код для сброса пароля: {self.code}", "Сброс пароля", self.user_data.login)
-                return True, 'Код отправлен'
+                status, msg = self.mail.send_email(f"Код для сброса пароля: {self.code}",
+                                                   "Сброс пароля", self.user_data.login)
+
+                return status, msg
             else:
                 return False, "Такой пользователь не существует!"
         else:
