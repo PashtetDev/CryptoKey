@@ -463,9 +463,13 @@ class KeyManager(QMainWindow):
         self.quit()
 
 
-if __name__ == "__main__":
+def __init():
     app = QApplication(sys.argv)
     window = KeyManager()
     window.show()
 
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    __init()
