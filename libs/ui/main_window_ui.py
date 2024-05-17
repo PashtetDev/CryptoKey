@@ -158,35 +158,36 @@ class Ui_MainWindow(object):
 "border-radius: 40px\n"
 "}\n"
 "\n"
-"QTableWidget{\n"
-"margin-left: 10px;\n"
-"}\n"
-"\n"
 "QTableWidget {\n"
 "margin-left: 10px;\n"
 "}\n"
 "\n"
 "QTableWidget  QHeaderView{\n"
-"color: black;\n"
+"color: #0D0D15;\n"
 "}\n"
+"\n"
 "\n"
 "QTableWidget::section {\n"
-"background-color: #CED4DA;\n"
-"height: 50"
-                        "px;\n"
-"color: white;\n"
+"background-color: #173B49;\n"
+"height: 50px;\n"
+"color: #0D0D15;\n"
 "font-size: 12px;\n"
-"}\n"
+""
+                        "}\n"
 "\n"
 "QTableWidget::item {\n"
-"background-color: #CED4DA;\n"
-"boarder-style: none;\n"
+"color: white;\n"
+"background-color: #173B49;\n"
 "}\n"
 "\n"
 "QTableWidget::item:selected {\n"
-"color: #FFF;\n"
-"background-color: #ADB5BD;\n"
-"boarder: none;\n"
+"color: white;\n"
+"background-color: #088572;\n"
+"}\n"
+"\n"
+"QTableWidget::item:hover {\n"
+"color: white;\n"
+"border: 2px solid  #088572;\n"
 "}\n"
 "\n"
 "#menuPanel > QWidget > QPushButton{\n"
@@ -221,8 +222,8 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#tgbotBtn:hover{\n"
-"background-color: #173B49;"
-                        "\n"
+"backgr"
+                        "ound-color: #173B49;\n"
 "border-radius: 10px;\n"
 "}\n"
 "\n"
@@ -422,7 +423,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.passwordManager.sizePolicy().hasHeightForWidth())
         self.passwordManager.setSizePolicy(sizePolicy)
         self.passwordManager.setMinimumSize(QSize(0, 0))
-        self.passwordManager.setMaximumSize(QSize(16777215, 16777215))
+        self.passwordManager.setMaximumSize(QSize(1999, 16777215))
         self.verticalLayout_2 = QVBoxLayout(self.passwordManager)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -594,7 +595,6 @@ class Ui_MainWindow(object):
         self.modelEdit.addItem("")
         self.modelEdit.addItem("")
         self.modelEdit.addItem("")
-        self.modelEdit.addItem("")
         self.modelEdit.setObjectName(u"modelEdit")
         self.modelEdit.setFont(font2)
         self.modelEdit.setCursor(QCursor(Qt.PointingHandCursor))
@@ -611,15 +611,6 @@ class Ui_MainWindow(object):
         self.password.setReadOnly(True)
 
         self.verticalLayout_20.addWidget(self.password)
-
-        self.generateBtn = QPushButton(self.mainBody_3)
-        self.generateBtn.setObjectName(u"generateBtn")
-        sizePolicy5.setHeightForWidth(self.generateBtn.sizePolicy().hasHeightForWidth())
-        self.generateBtn.setSizePolicy(sizePolicy5)
-        self.generateBtn.setFont(font5)
-        self.generateBtn.setCursor(QCursor(Qt.PointingHandCursor))
-
-        self.verticalLayout_20.addWidget(self.generateBtn, 0, Qt.AlignHCenter|Qt.AlignBottom)
 
         self.saveBtn = QPushButton(self.mainBody_3)
         self.saveBtn.setObjectName(u"saveBtn")
@@ -652,7 +643,7 @@ class Ui_MainWindow(object):
         self.settings.setMinimumSize(QSize(0, 0))
         self.settings.setMaximumSize(QSize(0, 16777215))
         self.verticalLayout_5 = QVBoxLayout(self.settings)
-        self.verticalLayout_5.setSpacing(0)
+        self.verticalLayout_5.setSpacing(10)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.title_2 = QWidget(self.settings)
@@ -675,6 +666,10 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_5.addWidget(self.title_2)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_5.addItem(self.verticalSpacer_6)
 
         self.user = QWidget(self.settings)
         self.user.setObjectName(u"user")
@@ -708,6 +703,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addWidget(self.user, 0, Qt.AlignHCenter|Qt.AlignTop)
 
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_5.addItem(self.verticalSpacer_4)
+
         self.buttons = QWidget(self.settings)
         self.buttons.setObjectName(u"buttons")
         sizePolicy.setHeightForWidth(self.buttons.sizePolicy().hasHeightForWidth())
@@ -716,65 +715,61 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.verticalLayout_9.setContentsMargins(20, 15, -1, 20)
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.pssChangeBtn = QPushButton(self.buttons)
+        self.pssChangeBtn.setObjectName(u"pssChangeBtn")
+        sizePolicy5.setHeightForWidth(self.pssChangeBtn.sizePolicy().hasHeightForWidth())
+        self.pssChangeBtn.setSizePolicy(sizePolicy5)
+        self.pssChangeBtn.setMinimumSize(QSize(270, 30))
+        self.pssChangeBtn.setFont(font5)
+        self.pssChangeBtn.setCursor(QCursor(Qt.PointingHandCursor))
 
-        self.verticalLayout_9.addItem(self.verticalSpacer_4)
-
-        self.pushButton_4 = QPushButton(self.buttons)
-        self.pushButton_4.setObjectName(u"pushButton_4")
-        sizePolicy5.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
-        self.pushButton_4.setSizePolicy(sizePolicy5)
-        self.pushButton_4.setMinimumSize(QSize(200, 30))
-        self.pushButton_4.setFont(font5)
-        self.pushButton_4.setCursor(QCursor(Qt.PointingHandCursor))
-
-        self.verticalLayout_9.addWidget(self.pushButton_4)
+        self.verticalLayout_9.addWidget(self.pssChangeBtn)
 
         self.uploadBtn = QPushButton(self.buttons)
         self.uploadBtn.setObjectName(u"uploadBtn")
         sizePolicy5.setHeightForWidth(self.uploadBtn.sizePolicy().hasHeightForWidth())
         self.uploadBtn.setSizePolicy(sizePolicy5)
-        self.uploadBtn.setMinimumSize(QSize(200, 30))
+        self.uploadBtn.setMinimumSize(QSize(270, 30))
         self.uploadBtn.setFont(font5)
         self.uploadBtn.setCursor(QCursor(Qt.PointingHandCursor))
 
         self.verticalLayout_9.addWidget(self.uploadBtn)
 
-        self.pushButton_5 = QPushButton(self.buttons)
-        self.pushButton_5.setObjectName(u"pushButton_5")
-        sizePolicy5.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
-        self.pushButton_5.setSizePolicy(sizePolicy5)
-        self.pushButton_5.setMinimumSize(QSize(200, 30))
-        self.pushButton_5.setFont(font5)
-        self.pushButton_5.setCursor(QCursor(Qt.PointingHandCursor))
+        self.customBtn = QPushButton(self.buttons)
+        self.customBtn.setObjectName(u"customBtn")
+        sizePolicy5.setHeightForWidth(self.customBtn.sizePolicy().hasHeightForWidth())
+        self.customBtn.setSizePolicy(sizePolicy5)
+        self.customBtn.setMinimumSize(QSize(270, 30))
+        self.customBtn.setFont(font5)
+        self.customBtn.setCursor(QCursor(Qt.PointingHandCursor))
 
-        self.verticalLayout_9.addWidget(self.pushButton_5)
+        self.verticalLayout_9.addWidget(self.customBtn)
 
-        self.pushButton_6 = QPushButton(self.buttons)
-        self.pushButton_6.setObjectName(u"pushButton_6")
-        sizePolicy5.setHeightForWidth(self.pushButton_6.sizePolicy().hasHeightForWidth())
-        self.pushButton_6.setSizePolicy(sizePolicy5)
-        self.pushButton_6.setMinimumSize(QSize(200, 30))
-        self.pushButton_6.setFont(font5)
-        self.pushButton_6.setCursor(QCursor(Qt.PointingHandCursor))
+        self.supportBtn = QPushButton(self.buttons)
+        self.supportBtn.setObjectName(u"supportBtn")
+        sizePolicy5.setHeightForWidth(self.supportBtn.sizePolicy().hasHeightForWidth())
+        self.supportBtn.setSizePolicy(sizePolicy5)
+        self.supportBtn.setMinimumSize(QSize(270, 30))
+        self.supportBtn.setFont(font5)
+        self.supportBtn.setCursor(QCursor(Qt.PointingHandCursor))
 
-        self.verticalLayout_9.addWidget(self.pushButton_6, 0, Qt.AlignTop)
+        self.verticalLayout_9.addWidget(self.supportBtn)
 
         self.delAccButton = QPushButton(self.buttons)
         self.delAccButton.setObjectName(u"delAccButton")
         sizePolicy5.setHeightForWidth(self.delAccButton.sizePolicy().hasHeightForWidth())
         self.delAccButton.setSizePolicy(sizePolicy5)
-        self.delAccButton.setMinimumSize(QSize(200, 30))
+        self.delAccButton.setMinimumSize(QSize(270, 30))
         self.delAccButton.setFont(font5)
         self.delAccButton.setCursor(QCursor(Qt.PointingHandCursor))
 
-        self.verticalLayout_9.addWidget(self.delAccButton, 0, Qt.AlignBottom)
+        self.verticalLayout_9.addWidget(self.delAccButton)
 
         self.quitBtn = QPushButton(self.buttons)
         self.quitBtn.setObjectName(u"quitBtn")
         sizePolicy2.setHeightForWidth(self.quitBtn.sizePolicy().hasHeightForWidth())
         self.quitBtn.setSizePolicy(sizePolicy2)
-        self.quitBtn.setMinimumSize(QSize(200, 30))
+        self.quitBtn.setMinimumSize(QSize(270, 30))
         self.quitBtn.setFont(font5)
         self.quitBtn.setCursor(QCursor(Qt.PointingHandCursor))
 
@@ -791,7 +786,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.mainPage.sizePolicy().hasHeightForWidth())
         self.mainPage.setSizePolicy(sizePolicy)
         self.mainPage.setMinimumSize(QSize(0, 0))
-        self.mainPage.setMaximumSize(QSize(0, 16777215))
+        self.mainPage.setMaximumSize(QSize(16777215, 16777215))
         self.verticalLayout_10 = QVBoxLayout(self.mainPage)
         self.verticalLayout_10.setSpacing(0)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
@@ -804,19 +799,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.title_3 = QWidget(self.widget_4)
-        self.title_3.setObjectName(u"title_3")
-        self.verticalLayout_11 = QVBoxLayout(self.title_3)
-        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
-        self.verticalLayout_11.setContentsMargins(20, 20, 0, 20)
-        self.label_5 = QLabel(self.title_3)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setFont(font4)
+        self.news = QWidget(self.widget_4)
+        self.news.setObjectName(u"news")
+        self.widget_7 = QWidget(self.news)
+        self.widget_7.setObjectName(u"widget_7")
+        self.widget_7.setGeometry(QRect(140, 220, 120, 80))
 
-        self.verticalLayout_11.addWidget(self.label_5, 0, Qt.AlignTop)
-
-
-        self.horizontalLayout_5.addWidget(self.title_3, 0, Qt.AlignTop)
+        self.horizontalLayout_5.addWidget(self.news)
 
 
         self.verticalLayout_10.addWidget(self.widget_4)
@@ -1092,9 +1081,8 @@ class Ui_MainWindow(object):
         self.closeEditor.setText("")
         self.stringEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u0445\u043e\u0434\u043d\u0430\u044f \u0441\u0442\u0440\u043e\u043a\u0430", None))
         self.modelEdit.setItemText(0, QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0447\u0430\u043b\u044c\u043d\u044b\u0439", None))
-        self.modelEdit.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0421\u043b\u0443\u0447\u0430\u0439\u043d\u044b\u0439", None))
-        self.modelEdit.setItemText(2, QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u0441\u0442\u043e\u0439", None))
-        self.modelEdit.setItemText(3, QCoreApplication.translate("MainWindow", u"\u0421\u0438\u043b\u044c\u043d\u044b\u0439", None))
+        self.modelEdit.setItemText(1, QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u0441\u0442\u043e\u0439", None))
+        self.modelEdit.setItemText(2, QCoreApplication.translate("MainWindow", u"\u0421\u0438\u043b\u044c\u043d\u044b\u0439", None))
 
 #if QT_CONFIG(tooltip)
         self.modelEdit.setToolTip("")
@@ -1105,18 +1093,16 @@ class Ui_MainWindow(object):
         self.modelEdit.setCurrentText("")
         self.modelEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0435\u0442\u0435 \u043c\u043e\u0434\u0435\u043b\u044c \u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u0438", None))
         self.password.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0430\u0440\u043e\u043b\u044c", None))
-        self.generateBtn.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
         self.saveBtn.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.userIcon.setText("")
         self.username.setText(QCoreApplication.translate("MainWindow", u"\u0442\u0432\u043e\u044f@\u043f\u043e\u0447\u0442\u0430.\u0440\u0443", None))
-        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043c\u0435\u043d\u0430 \u043f\u0430\u0440\u043e\u043b\u044f", None))
+        self.pssChangeBtn.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043c\u0435\u043d\u0430 \u043f\u0430\u0440\u043e\u043b\u044f", None))
         self.uploadBtn.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u043f\u0430\u0440\u043e\u043b\u0438", None))
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0435\u0434\u043b\u043e\u0436\u0438\u0442\u044c \u0444\u0438\u0447\u0443", None))
-        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0439", None))
+        self.customBtn.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u043a\u0430\u0441\u0442\u043e\u043c\u043d\u044b\u0439 \u0430\u043b\u0433\u043e\u0440\u0438\u0442\u043c", None))
+        self.supportBtn.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u0432 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443", None))
         self.delAccButton.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0430\u043a\u043a\u0430\u0443\u043d\u0442", None))
         self.quitBtn.setText(QCoreApplication.translate("MainWindow", u"\u0412\u042b\u0419\u0422\u0418", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u0413\u043b\u0430\u0432\u043d\u0430\u044f", None))
         self.pics_2.setText("")
         self.email.setText("")
         self.email.setPlaceholderText(QCoreApplication.translate("MainWindow", u"E-mail", None))

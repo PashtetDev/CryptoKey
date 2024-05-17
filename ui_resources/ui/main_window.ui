@@ -316,34 +316,35 @@ border: 5px solid white;
 border-radius: 40px
 }
 
-QTableWidget{
-margin-left: 10px;
-}
-
 QTableWidget {
 margin-left: 10px;
 }
 
 QTableWidget  QHeaderView{
-color: black;
+color: #0D0D15;
 }
 
+
 QTableWidget::section {
-background-color: #CED4DA;
+background-color: #173B49;
 height: 50px;
-color: white;
+color: #0D0D15;
 font-size: 12px;
 }
 
 QTableWidget::item {
-background-color: #CED4DA;
-boarder-style: none;
+color: white;
+background-color: #173B49;
 }
 
 QTableWidget::item:selected {
-color: #FFF;
-background-color: #ADB5BD;
-boarder: none;
+color: white;
+background-color: #088572;
+}
+
+QTableWidget::item:hover {
+color: white;
+border: 2px solid  #088572;
 }
 
 #menuPanel &gt; QWidget &gt; QPushButton{
@@ -617,7 +618,7 @@ padding-bottom:10px;
                 <string>Главная</string>
                </property>
                <property name="icon">
-                <iconset resource="icon.qrc">
+                <iconset resource="../icon.qrc">
                  <normaloff>:/pics/res/home.svg</normaloff>:/pics/res/home.svg</iconset>
                </property>
                <property name="iconSize">
@@ -652,7 +653,7 @@ padding-bottom:10px;
                 <string>Менеджер паролей</string>
                </property>
                <property name="icon">
-                <iconset resource="icon.qrc">
+                <iconset resource="../icon.qrc">
                  <normaloff>:/pics/res/shield.svg</normaloff>:/pics/res/shield.svg</iconset>
                </property>
                <property name="iconSize">
@@ -688,7 +689,7 @@ padding-bottom:10px;
                 <string>Настройки</string>
                </property>
                <property name="icon">
-                <iconset resource="icon.qrc">
+                <iconset resource="../icon.qrc">
                  <normaloff>:/pics/res/settings.svg</normaloff>:/pics/res/settings.svg</iconset>
                </property>
                <property name="iconSize">
@@ -808,7 +809,7 @@ padding-bottom:10px;
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>1999</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1217,7 +1218,7 @@ padding-bottom:10px;
                                <string/>
                               </property>
                               <property name="icon">
-                               <iconset resource="icon.qrc">
+                               <iconset resource="../icon.qrc">
                                 <normaloff>:/pics/res/x-circle.svg</normaloff>:/pics/res/x-circle.svg</iconset>
                               </property>
                               <property name="iconSize">
@@ -1282,11 +1283,6 @@ padding-bottom:10px;
                            </item>
                            <item>
                             <property name="text">
-                             <string>Случайный</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
                              <string>Простой</string>
                             </property>
                            </item>
@@ -1309,29 +1305,6 @@ padding-bottom:10px;
                            </property>
                            <property name="readOnly">
                             <bool>true</bool>
-                           </property>
-                          </widget>
-                         </item>
-                         <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-                          <widget class="QPushButton" name="generateBtn">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="font">
-                            <font>
-                             <family>Segoe UI Semibold</family>
-                             <pointsize>12</pointsize>
-                             <bold>true</bold>
-                            </font>
-                           </property>
-                           <property name="cursor">
-                            <cursorShape>PointingHandCursor</cursorShape>
-                           </property>
-                           <property name="text">
-                            <string>Сгенерировать</string>
                            </property>
                           </widget>
                          </item>
@@ -1395,7 +1368,7 @@ padding-bottom:10px;
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5">
              <property name="spacing">
-              <number>0</number>
+              <number>10</number>
              </property>
              <property name="leftMargin">
               <number>0</number>
@@ -1452,6 +1425,19 @@ padding-bottom:10px;
                </layout>
               </widget>
              </item>
+             <item>
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
              <item alignment="Qt::AlignHCenter|Qt::AlignTop">
               <widget class="QWidget" name="user" native="true">
                <property name="sizePolicy">
@@ -1494,7 +1480,7 @@ padding-bottom:10px;
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap resource="icon.qrc">:/pics/res/user.svg</pixmap>
+                   <pixmap resource="../icon.qrc">:/pics/res/user.svg</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -1534,6 +1520,19 @@ padding-bottom:10px;
               </widget>
              </item>
              <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <widget class="QWidget" name="buttons" native="true">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1555,20 +1554,7 @@ padding-bottom:10px;
                  <number>20</number>
                 </property>
                 <item>
-                 <spacer name="verticalSpacer_4">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton_4">
+                 <widget class="QPushButton" name="pssChangeBtn">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1577,7 +1563,7 @@ padding-bottom:10px;
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>200</width>
+                    <width>270</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -1606,7 +1592,7 @@ padding-bottom:10px;
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>200</width>
+                    <width>270</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -1626,7 +1612,7 @@ padding-bottom:10px;
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_5">
+                 <widget class="QPushButton" name="customBtn">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1635,7 +1621,7 @@ padding-bottom:10px;
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>200</width>
+                    <width>270</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -1650,12 +1636,12 @@ padding-bottom:10px;
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>Предложить фичу</string>
+                   <string>Изменить кастомный алгоритм</string>
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignTop">
-                 <widget class="QPushButton" name="pushButton_6">
+                <item>
+                 <widget class="QPushButton" name="supportBtn">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1664,7 +1650,7 @@ padding-bottom:10px;
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>200</width>
+                    <width>270</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -1679,11 +1665,11 @@ padding-bottom:10px;
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="text">
-                   <string>Проверка обновлений</string>
+                   <string>Обращение в поддержку</string>
                   </property>
                  </widget>
                 </item>
-                <item alignment="Qt::AlignBottom">
+                <item>
                  <widget class="QPushButton" name="delAccButton">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1693,7 +1679,7 @@ padding-bottom:10px;
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>200</width>
+                    <width>270</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -1722,7 +1708,7 @@ padding-bottom:10px;
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>200</width>
+                    <width>270</width>
                     <height>30</height>
                    </size>
                   </property>
@@ -1763,7 +1749,7 @@ padding-bottom:10px;
             </property>
             <property name="maximumSize">
              <size>
-              <width>0</width>
+              <width>16777215</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1807,35 +1793,18 @@ padding-bottom:10px;
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
-                <item alignment="Qt::AlignTop">
-                 <widget class="QWidget" name="title_3" native="true">
-                  <layout class="QVBoxLayout" name="verticalLayout_11">
-                   <property name="leftMargin">
-                    <number>20</number>
+                <item>
+                 <widget class="QWidget" name="news" native="true">
+                  <widget class="QWidget" name="widget_7" native="true">
+                   <property name="geometry">
+                    <rect>
+                     <x>140</x>
+                     <y>220</y>
+                     <width>120</width>
+                     <height>80</height>
+                    </rect>
                    </property>
-                   <property name="topMargin">
-                    <number>20</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>20</number>
-                   </property>
-                   <item alignment="Qt::AlignTop">
-                    <widget class="QLabel" name="label_5">
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI Semilight</family>
-                       <pointsize>14</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Главная</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                  </widget>
                  </widget>
                 </item>
                </layout>
@@ -1940,7 +1909,7 @@ padding-bottom:10px;
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="icon.qrc">:/pics/res/shield.svg</pixmap>
+             <pixmap resource="../icon.qrc">:/pics/res/shield.svg</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -2258,7 +2227,7 @@ padding-bottom:10px;
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="icon.qrc">:/pics/res/shield.svg</pixmap>
+             <pixmap resource="../icon.qrc">:/pics/res/shield.svg</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -2456,7 +2425,9 @@ padding-bottom:10px;
   </widget>
  </widget>
  <resources>
-  <include location="icon.qrc"/>
+  <include location="../icon.qrc"/>
+  <include location="../icon.qrc"/>
+  <include location="../icon.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -27,7 +27,6 @@ class Account:
             if not check:
                 self.user_data.login = _login
                 self.code = crypto.gen_code(4)
-                print(self.code)
                 status, msg = self.mail.send_email(f"Код подтверждения: {self.code}",
                                                    "Подтверждение почты", self.user_data.login)
                 return status, msg
@@ -44,7 +43,6 @@ class Account:
                 check = True
             if check:
                 self.code = crypto.gen_code(6)
-                print(self.code)
                 status, msg = self.mail.send_email(f"Код для сброса пароля: {self.code}",
                                                    "Сброс пароля", self.user_data.login)
 
@@ -80,8 +78,6 @@ class Account:
                     user = self.user_data.get_user_with_login()
                     id = user['id']
                     self.user_data.update_pass(id, _data)
-                    self.mail.send_email('Ваш пароль был изменен.\n'
-                                         f'Ваш логин: {email}\nПароль: {pss}', "Смена пароля", email)
 
                 return True, 'Done'
             else:

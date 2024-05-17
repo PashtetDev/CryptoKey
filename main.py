@@ -1,11 +1,28 @@
 import sys
 import os
 from libs.ui.main_window_ui import Ui_MainWindow
+from libs.ui.support_window_ui import Ui_Dialog as Support
+from libs.ui.confirm_ui import Ui_Dialog as Confirm
+from libs.ui.change_pss_ui import Ui_Dialog as ChangePss
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
 from libs import crypto
-from libs.account import Account
 
+try:
+    import custom.custom as custom
+    found = True
+except ModuleNotFoundError as err:
+    found = False
+
+from libs.account import Account
+import subprocess
+
+empty_custom = 'def custom_alg(string):\n'+\
+'   new_pss = string\n'+\
+'   #########################################\n\n'+\
+'   #Ваш кастомный алгоритм генерации пароля#\n\n'+\
+'   #########################################\n'+\
+'   return new_pss\n'
 
 def write_current_user(_login, pss):
     with open(f'{os.path.dirname(__file__)}\\libs\\data\\current_user', "w") as f:
@@ -23,7 +40,7 @@ class KeyManager(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.buttons_connect()
+        self.object_connect()
         self.col = None
         self.current_id = None
         self.user = Account()
@@ -39,6 +56,7 @@ class KeyManager(QMainWindow):
                     self.col = self.user.user_data.get_user_with_login()['collection']
                     self.open_main_window(doc['login'])
                 else:
+                    self.open_login_window()
                     warning_notification("Пароль или логин не совпадает!")
             else:
                 self.open_login_window()
@@ -58,7 +76,9 @@ class KeyManager(QMainWindow):
             else:
                 warning_notification("Пароль или логин не совпадает!")
 
-    def buttons_connect(self):
+    def object_connect(self):
+        self.ui.stringEdit.textChanged.connect(self.gen_pss)
+        self.ui.modelEdit.currentIndexChanged.connect(self.gen_pss)
         self.ui.tableWidget.clicked.connect(self.on_select_password)
         self.ui.loginBtn.clicked.connect(self.login)
         self.ui.toExitBtn.clicked.connect(self.open_login_window)
@@ -69,11 +89,79 @@ class KeyManager(QMainWindow):
         self.ui.settingBtn.clicked.connect(self.open_main_page)
         self.ui.quitBtn.clicked.connect(self.quit)
         self.ui.deleteBtn.clicked.connect(self.delete_current_key)
-        self.ui.delAccButton.clicked.connect(self.delete_account)
+        self.ui.delAccButton.clicked.connect(self.open_confirm_window)
         self.ui.uploadBtn.clicked.connect(self.download_data)
+        self.ui.closeEditor.clicked.connect(self.close_key_editor)
+        self.ui.saveBtn.clicked.connect(self.on_save_btn_clcked)
+        self.ui.codeInput.textChanged.connect(self.check_code)
+        self.ui.regBtn.clicked.connect(self.registration)
+        self.ui.sendCodeBtn.clicked.connect(self.on_send_btn_clicked)
+        self.ui.supportBtn.clicked.connect(self.open_support_window)
+        self.ui.customBtn.clicked.connect(self.open_custom)
+        self.ui.pssChangeBtn.clicked.connect(self.open_change_pss_window)
+        if found:
+            self.ui.modelEdit.addItem("Кастомный")
+            self.ui.customBtn.setText("Изменить кастомный алгоритм")
+        else:
+            self.ui.customBtn.setText("Создать кастомный алгоритм")
 
         self.ui.newKeyBtn.clicked.connect(self.open_key_editor)
 
+    def open_custom(self):
+        if not os.path.exists(f"{os.path.dirname(__file__)}\\custom\\custom.py"):
+            with open(f"{os.path.dirname(__file__)}\\custom\\custom.py", "w") as f:
+                print(empty_custom, file=f)
+                self.ui.customBtn.setText("Изменить кастомный алгоритм")
+        subprocess.Popen(f'explorer /select, "{os.path.dirname(__file__)}\\custom\\custom.py"')
+
+    def open_support_window(self):
+        self.new_window = QtWidgets.QDialog()
+        self.ui_window = Support()
+        self.ui_window.setupUi(self.new_window)
+        self.ui_window.sendBtn.clicked.connect(self.send_support_msg)
+
+        self.new_window.show()
+
+    def registration(self):
+        mode = self.sender().text() == "Зарегистрироваться"
+        if self.user.code_chck:
+            status, msg = self.user.registration(self.ui.createPss.text(), self.ui.confPss.text(), mode)
+            if status:
+                self.ui.login.setText(str(self.user.user_data.login))
+                self.open_login_window()
+            else:
+                warning_notification(msg)
+        else:
+            warning_notification('Почта не подтверждена')
+
+    def open_change_pss_window(self):
+        self.new_window = QtWidgets.QDialog()
+        self.chg_pss_window = ChangePss()
+        self.chg_pss_window.setupUi(self.new_window)
+        self.chg_pss_window.saveBtn.clicked.connect(self.change_pss)
+
+        self.new_window.show()
+
+    def change_pss(self):
+        status, msg = self.user.registration(self.chg_pss_window.pss.text(), self.chg_pss_window.confPss.text(), False)
+        if not status:
+            warning_notification(msg)
+        else:
+            write_current_user(self.user.user_data.login, self.chg_pss_window.pss.text())
+            self.new_window.close()
+
+    def send_support_msg(self):
+        if self.ui_window.textEdit.toPlainText() != "":
+            if self.ui_window.themeEdit.currentIndex() != -1:
+                self.user.mail.send_email(self.ui_window.textEdit.toPlainText() +
+                                          f"\n\nFrom {self.user.user_data.login}",
+                                          self.ui_window.themeEdit.currentText(), "support")
+            else:
+                warning_notification("Выберите тему обращения")
+        else:
+            warning_notification("Пустое текстовое поле")
+
+        self.new_window.close()
 
     def open_main_page(self):
         sender = self.sender().objectName()
@@ -93,13 +181,16 @@ class KeyManager(QMainWindow):
         self.ui.keyEditor.setMaximumSize(300, 0)
         self.ui.deleteBtn.hide()
 
+    def on_save_btn_clcked(self):
+        if self.sender().text() == "Сохранить":
+            self.add_key()
+        else:
+            self.update_key()
+
     def open_key_editor(self):
-        self.ui.generateBtn.clicked.connect(self.gen_pss)
         self.ui.stringEdit.setText('')
-        self.ui.closeEditor.clicked.connect(self.close_key_editor)
         if self.sender().objectName() == 'newKeyBtn':
             self.ui.keyEditor.setMaximumSize(300, 450)
-            self.ui.saveBtn.clicked.connect(self.add_key)
             self.ui.saveBtn.setText("Сохранить")
             self.ui.password.setText('Пароль')
             self.ui.titleEdit.setText('')
@@ -107,7 +198,6 @@ class KeyManager(QMainWindow):
             self.ui.tableWidget.clearSelection()
         else:
             self.ui.saveBtn.setText("Изменить")
-            self.ui.saveBtn.clicked.connect(self.update_key)
             if len(self.ui.tableWidget.selectedItems()) > 0:
                 self.ui.keyEditor.setMaximumSize(300, 450)
                 index = self.ui.tableWidget.selectedItems()[0].row()
@@ -155,7 +245,7 @@ class KeyManager(QMainWindow):
     def gen_pss(self):
         input_str = self.ui.stringEdit.text()
         if len(input_str) == 0:
-            warning_notification("Пустая строка пароля!")
+            self.ui.password.setText("Пароль")
         else:
             model = self.ui.modelEdit.currentText()
 
@@ -163,8 +253,8 @@ class KeyManager(QMainWindow):
                 pss = crypto.simple_alg(input_str)
             elif model == 'Сильный':
                 pss = crypto.strong_alg(input_str)
-            elif model == 'Случайный':
-                pss = crypto.strong_alg(input_str)
+            elif model == 'Кастомный':
+                pss = custom.custom_alg(input_str)
             else:
                 pss = input_str
 
@@ -178,9 +268,10 @@ class KeyManager(QMainWindow):
     def open_main_window(self, login):
         max = 16777215
 
-        self.ui.username.setText(login)
+        self.close_general()
         self.close_key_editor()
         self.close_main_menu()
+        self.ui.username.setText(login)
         self.ui.general.setMaximumSize(max, max)
         self.ui.mainPage.setMaximumSize(max, max)
         self.ui.loginMenu.setMaximumSize(0, 0)
@@ -195,6 +286,21 @@ class KeyManager(QMainWindow):
         else:
             self.close_key_editor()
 
+    def open_confirm_window(self):
+        self.new_window = QtWidgets.QDialog()
+        self.confirm_window = Confirm()
+        self.confirm_window.setupUi(self.new_window)
+        self.confirm_window.buttonBox.accepted.connect(self.delete_account)
+        self.confirm_window.buttonBox.rejected.connect(self.new_window.close)
+
+        self.new_window.show()
+
+    def on_send_btn_clicked(self):
+        if self.sender().text() == "Отправить код":
+            self.ui.sendCodeBtn.clicked.connect(self.send_code)
+        else:
+            self.ui.sendCodeBtn.clicked.connect(self.send_reset_code)
+
     def open_registration_window(self):
         sizeX = 500
         max = 16777215
@@ -206,13 +312,11 @@ class KeyManager(QMainWindow):
         self.ui.regMenu.setMinimumSize(sizeX, 0)
 
         if sender == 'signupBtn':
-            self.ui.sendCodeBtn.clicked.connect(self.send_code)
+            self.ui.regBtn.setText("Зарегистрироваться")
+            self.ui.sendCodeBtn.setText("Отправить код")
         else:
             self.ui.regBtn.setText("Сменить пароль")
-            self.ui.sendCodeBtn.clicked.connect(self.send_reset_code)
-
-        self.ui.codeInput.textChanged.connect(self.check_code)
-        self.ui.regBtn.clicked.connect(self.registration)
+            self.ui.sendCodeBtn.setText("Отправить код сброса")
 
     def send_code(self):
         email = self.ui.email.text()
@@ -238,18 +342,6 @@ class KeyManager(QMainWindow):
                 self.ui.email.setReadOnly(True)
                 self.ui.codeInput.setReadOnly(True)
 
-    def registration(self):
-        mode = self.sender().text() == "Зарегистрироваться"
-        if self.user.code_chck:
-            status, msg = self.user.registration(self.ui.createPss.text(), self.ui.confPss.text(), mode)
-            if status:
-                self.ui.login.setText(str(self.user.user_data.login))
-                self.open_login_window()
-            else:
-                warning_notification(msg)
-        else:
-            warning_notification('Почта не подтверждена')
-
     def open_login_window(self):
         sizeX = 500
         max = 16777215
@@ -267,11 +359,6 @@ class KeyManager(QMainWindow):
         self.ui.loginMenu.setMinimumSize(0, 0)
         self.ui.regMenu.setMaximumSize(0, 0)
         self.ui.regMenu.setMinimumSize(0, 0)
-
-    def close_general_windows(self):
-        self.ui.mainPage.setMaximumSize(0, 0)
-        self.ui.passwordManager.setMaximumSize(0, 0)
-        self.ui.settings.setMaximumSize(0, 0)
 
     def view_data(self):
         col = self.col

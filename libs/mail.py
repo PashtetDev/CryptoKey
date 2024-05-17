@@ -11,6 +11,9 @@ class Mail:
             self.password = f.read()
 
     def send_email(self, message, theme, recipient):
+        if recipient == "support":
+            recipient = self.sender
+
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
 
