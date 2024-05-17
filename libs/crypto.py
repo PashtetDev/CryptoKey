@@ -65,7 +65,7 @@ def strong_alg(string):
                 new_pss += translate2[a]
         else:
             new_pss += a
-            if random.randint(0, 5) >= 3:
+            if random.randint(1, 5) >= 3:
                 new_pss += '_'
     if len(new_pss) < 12:
         power = 11 - len(new_pss)

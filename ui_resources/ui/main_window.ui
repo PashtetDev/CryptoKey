@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>Pashtetdev</author>
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
@@ -233,11 +234,73 @@ padding: 0;
 margin: 0;
 color: #fff;
 }
+#from1, #from2{
+padding-left: 5px;
+color: #95d5b2;
+}
+#check, #alg{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:2, stop:0 #173B49, stop:0.55 #088572, stop:1 #088572);
+border-radius: 10px;
+}
+#moreBtn{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:2, stop:0 #08D472, stop:0.45 #088572, stop:1 #088572);
+color: white;
+border-radius: 10px;
+}
+#moreBtn:hover{
+border: 2px solid white;
+}
+#label_4, #newsTitle, #newsTitle2{
+padding: 5px;
+}
+#custBtn{
+margin-left: 7px;
+background-color: #57b8ff;
+padding: 5px;
+border-radius: 10px;
+}
+#custBtn:hover{
+margin-left: 7px;
+background-color: #1789fc;
+padding: 5px;
+border-radius: 10px;
+}
+#custBtn:pressed{
+margin-left: 7px;
+background-color: #296eb4;
+padding: 5px;
+border-radius: 10px;
+}
+#checkBtn, #readBtn, #checkBtn, #readBtn2, #readBtn3{
+margin-left: 7px;
+background-color: #088572;
+padding: 5px;
+border-radius: 10px;
+}
+#checkBtn:hover, #readBtn2:hover, #readBtn3:hover, #readBtn:hover{
+background-color:#173B49;
+padding: 5px;
+border-radius: 10px;
+}
+#checkBtn:pressed, #readBtn2:pressed, #readBtn3:pressed, #readBtn:pressed{
+background-color:  #0D0D15;
+padding: 5px;
+border-radius: 10px;
+}
+
+#custom{
+background-color: qlineargradient(spread:pad, x-1:1, y1:0, x2:1, y2:2, stop:0 #a8dcd1, stop:0.3 #65def1, stop:1 #65def1);
+border-radius: 10px;
+}
+#header{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:2, stop:0 #088572, stop:0.15 #088572, stop:0.5 #173B49, stop:1 #173B49);
+border-radius: 10px;
+}
 
 QComboBox QAbstractItemView
 {
-	selection-background-color: #088572;
-	background-color: #173B49;
+selection-background-color: #088572;
+background-color: #173B49;
 }
 
 #centralWidget{
@@ -256,7 +319,6 @@ background-color:  #173B49;
 #closeEditor:pressed{
 background-color: #0D0D15;
 }
-
 
 #menuPanel{
 background-color: #088572
@@ -290,24 +352,18 @@ font-weight: bold;
 background-color:#0D0D15;
 }
 
-
-
-
-
-
-
-
-
-
-
 #menuPanel &gt; QLabel{
 text-align: left;
 padding: 5px 7px;
 }
-
-#title{
+#postTitle{
+margin-left:2px;
+}
+#plainTextEdit{
+margin-left:4px;
+}
+#title, #slogan{
 text-align: left;
-padding: 5px 5px 5px 22px;
 }
 
 #userIcon{
@@ -323,7 +379,6 @@ margin-left: 10px;
 QTableWidget  QHeaderView{
 color: #0D0D15;
 }
-
 
 QTableWidget::section {
 background-color: #173B49;
@@ -388,7 +443,6 @@ border: 3px solid #0D0D15;
 font-weight: bold;
 background-color:#0D0D15;
 }
-
 
 #buttons &gt; QPushButton, #buttons_2 &gt; QPushButton{
 text-align: left;
@@ -513,21 +567,21 @@ padding-bottom:10px;
           </property>
           <item>
            <widget class="QWidget" name="widget_3" native="true">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <layout class="QVBoxLayout" name="verticalLayout_11">
              <property name="spacing">
               <number>0</number>
              </property>
              <property name="leftMargin">
-              <number>0</number>
+              <number>20</number>
              </property>
              <property name="topMargin">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="rightMargin">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="bottomMargin">
-              <number>9</number>
+              <number>0</number>
              </property>
              <item alignment="Qt::AlignLeft">
               <widget class="QLabel" name="title">
@@ -549,6 +603,19 @@ padding-bottom:10px;
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="slogan">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semilight</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Password Manager</string>
                </property>
               </widget>
              </item>
@@ -809,7 +876,7 @@ padding-bottom:10px;
             </property>
             <property name="maximumSize">
              <size>
-              <width>1999</width>
+              <width>0</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1755,20 +1822,231 @@ padding-bottom:10px;
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_10">
              <property name="spacing">
-              <number>0</number>
+              <number>20</number>
              </property>
              <property name="leftMargin">
-              <number>0</number>
+              <number>20</number>
              </property>
              <property name="topMargin">
-              <number>0</number>
+              <number>20</number>
              </property>
              <property name="rightMargin">
-              <number>0</number>
+              <number>20</number>
              </property>
              <property name="bottomMargin">
-              <number>0</number>
+              <number>20</number>
              </property>
+             <item>
+              <widget class="QWidget" name="header" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>170</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>170</height>
+                </size>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="image">
+                  <property name="maximumSize">
+                   <size>
+                    <width>140</width>
+                    <height>140</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="../icon.qrc">:/pics/res/image.png</pixmap>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignVCenter">
+                 <widget class="QWidget" name="widget_8" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>140</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>140</height>
+                   </size>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_25">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item alignment="Qt::AlignTop">
+                    <widget class="QLabel" name="postTitle">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                       <pointsize>14</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Надежный пароль</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="plainTextEdit">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
+                     <property name="plainText">
+                      <string>тайна, защищающая сокровища твоего цифрового мира</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_7">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_9" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_10">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QPushButton" name="checkBtn">
+                        <property name="minimumSize">
+                         <size>
+                          <width>150</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="text">
+                         <string>Проверить надежность</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="readBtn3">
+                        <property name="minimumSize">
+                         <size>
+                          <width>120</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>120</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>О надежности</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
              <item>
               <widget class="QWidget" name="widget_4" native="true">
                <property name="sizePolicy">
@@ -1777,9 +2055,21 @@ padding-bottom:10px;
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <layout class="QHBoxLayout" name="horizontalLayout_5">
                 <property name="spacing">
-                 <number>0</number>
+                 <number>20</number>
                 </property>
                 <property name="leftMargin">
                  <number>0</number>
@@ -1794,17 +2084,313 @@ padding-bottom:10px;
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QWidget" name="news" native="true">
-                  <widget class="QWidget" name="widget_7" native="true">
-                   <property name="geometry">
-                    <rect>
-                     <x>140</x>
-                     <y>220</y>
-                     <width>120</width>
-                     <height>80</height>
-                    </rect>
-                   </property>
-                  </widget>
+                 <widget class="QWidget" name="check" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_22">
+                   <item>
+                    <widget class="QPlainTextEdit" name="newsTitle">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                       <pointsize>9</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="plainText">
+                      <string>Идеальный пароль по науке: трудно взломать, невозможно забыть</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item alignment="Qt::AlignBottom">
+                    <widget class="QLabel" name="from1">
+                     <property name="text">
+                      <string>DataLine</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="readBtn">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semilight</family>
+                       <pointsize>10</pointsize>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Читать</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="alg" native="true">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_24">
+                   <item>
+                    <widget class="QPlainTextEdit" name="newsTitle2">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                       <pointsize>9</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="plainText">
+                      <string>Криптоалгоритмы. Классификация с точки зрения количества ключей</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item alignment="Qt::AlignBottom">
+                    <widget class="QLabel" name="from2">
+                     <property name="text">
+                      <string>den_golub</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="readBtn2">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semilight</family>
+                       <pointsize>10</pointsize>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Читать</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignTop">
+              <widget class="QWidget" name="widget_7" native="true">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>150</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>ArrowCursor</cursorShape>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <property name="spacing">
+                 <number>20</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QWidget" name="custom" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_21">
+                   <item>
+                    <widget class="QPlainTextEdit" name="label_4">
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                       <pointsize>10</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="plainText">
+                      <string>Хотите написать на Python свой кастомный генератор паролей?</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="custBtn">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semilight</family>
+                       <pointsize>10</pointsize>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="text">
+                      <string>Написать</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="moreBtn">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>12</pointsize>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string>Узнать больше</string>
+                  </property>
                  </widget>
                 </item>
                </layout>
@@ -2425,8 +3011,6 @@ padding-bottom:10px;
   </widget>
  </widget>
  <resources>
-  <include location="../icon.qrc"/>
-  <include location="../icon.qrc"/>
   <include location="../icon.qrc"/>
  </resources>
  <connections/>

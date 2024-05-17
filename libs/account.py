@@ -17,18 +17,18 @@ class Account:
         self.access = False
         self.code_chck = False
         self.code = None
-        self.user_data = Data()
+        self.data = Data()
 
     def send_code(self, _login):
         if is_login(_login):
             check = False
-            if self.user_data.get_user_with_login() is not None:
+            if self.data.get_user_with_login() is not None:
                 check = True
             if not check:
-                self.user_data.login = _login
+                self.data.login = _login
                 self.code = crypto.gen_code(4)
                 status, msg = self.mail.send_email(f"Код подтверждения: {self.code}",
-                                                   "Подтверждение почты", self.user_data.login)
+                                                   "Подтверждение почты", self.data.login)
                 return status, msg
             else:
                 return False, "Такой пользователь существует!"
@@ -36,15 +36,15 @@ class Account:
             return False, 'Введен некорректный адрес электронной почты!'
 
     def send_reset_code(self, _login):
-        self.user_data.login = _login
+        self.data.login = _login
         if is_login(_login):
             check = False
-            if self.user_data.get_user_with_login() is not None:
+            if self.data.get_user_with_login() is not None:
                 check = True
             if check:
                 self.code = crypto.gen_code(6)
                 status, msg = self.mail.send_email(f"Код для сброса пароля: {self.code}",
-                                                   "Сброс пароля", self.user_data.login)
+                                                   "Сброс пароля", self.data.login)
 
                 return status, msg
             else:
@@ -53,7 +53,7 @@ class Account:
             return False, 'Введен некорректный адрес электронной почты!'
 
     def code_check(self, input_code, _login):
-        if self.user_data.login == _login:
+        if self.data.login == _login:
             if int(input_code) == self.code:
                 self.code_chck = True
                 return True, 'Код подтвержден'
@@ -63,7 +63,7 @@ class Account:
             return False, 'Почта была изменена'
 
     def registration(self, pss, conf_pss, create):
-        email = self.user_data.login
+        email = self.data.login
         if len(pss) > 3:
             if pss == conf_pss:
                 _data = {
@@ -71,13 +71,13 @@ class Account:
                     'password': f"{pss}"
                 }
                 if create:
-                    self.user_data.create_account(_data)
+                    self.data.create_account(_data)
                     self.mail.send_email('Добро пожаловать в CryptoKey - менеджер генерации и хранения паролей\n'
                                          f'Ваш логин: {email}\nПароль: {pss}', "Вы в системе!", email)
                 else:
-                    user = self.user_data.get_user_with_login()
+                    user = self.data.get_user_with_login()
                     id = user['id']
-                    self.user_data.update_pass(id, _data)
+                    self.data.update_pass(id, _data)
 
                 return True, 'Done'
             else:
@@ -86,8 +86,8 @@ class Account:
             return False, 'Пароль должен быть от 4 символов'
 
     def login(self, _login, pss):
-        self.user_data.login = _login
-        acc_doc = self.user_data.get_user_with_login()
+        self.data.login = _login
+        acc_doc = self.data.get_user_with_login()
         self.access = False
         if acc_doc is not None:
             if acc_doc['password'] == pss:

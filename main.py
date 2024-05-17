@@ -3,19 +3,20 @@ import os
 from libs.ui.main_window_ui import Ui_MainWindow
 from libs.ui.support_window_ui import Ui_Dialog as Support
 from libs.ui.confirm_ui import Ui_Dialog as Confirm
+from libs.ui.reliability_ui import Ui_Dialog as Reliability
 from libs.ui.change_pss_ui import Ui_Dialog as ChangePss
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
 from libs import crypto
+from libs.account import Account
+import subprocess
+import webbrowser
 
 try:
     import custom.custom as custom
     found = True
 except ModuleNotFoundError as err:
     found = False
-
-from libs.account import Account
-import subprocess
 
 empty_custom = 'def custom_alg(string):\n'+\
 '   new_pss = string\n'+\
@@ -38,12 +39,15 @@ def warning_notification(msg):
 class KeyManager(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+        self.link_2 = None
+        self.link_1 = None
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.object_connect()
         self.col = None
         self.current_id = None
         self.user = Account()
+        self.get_news()
         self.get_current_user()
 
     def get_current_user(self):
@@ -52,8 +56,8 @@ class KeyManager(QMainWindow):
             doc = eval(data)
             if doc['login'] != '':
                 if self.user.login(doc['login'], doc['password']):
-                    self.user.user_data.login = doc['login']
-                    self.col = self.user.user_data.get_user_with_login()['collection']
+                    self.user.data.login = doc['login']
+                    self.col = self.user.data.get_user_with_login()['collection']
                     self.open_main_window(doc['login'])
                 else:
                     self.open_login_window()
@@ -69,8 +73,8 @@ class KeyManager(QMainWindow):
             warning_notification('Пустая строка!')
         else:
             if self.user.login(_login, pss):
-                self.user.user_data.login = _login
-                self.col = self.user.user_data.get_user_with_login()['collection']
+                self.user.data.login = _login
+                self.col = self.user.data.get_user_with_login()['collection']
                 self.open_main_window(_login)
                 write_current_user(_login, pss)
             else:
@@ -99,6 +103,13 @@ class KeyManager(QMainWindow):
         self.ui.supportBtn.clicked.connect(self.open_support_window)
         self.ui.customBtn.clicked.connect(self.open_custom)
         self.ui.pssChangeBtn.clicked.connect(self.open_change_pss_window)
+        self.ui.custBtn.clicked.connect(self.open_custom)
+        self.ui.readBtn.clicked.connect(self.open_url)
+        self.ui.readBtn2.clicked.connect(self.open_url)
+        self.ui.readBtn3.clicked.connect(self.open_url)
+        self.ui.moreBtn.clicked.connect(self.open_url)
+        self.ui.checkBtn.clicked.connect(self.reliability_check)
+
         if found:
             self.ui.modelEdit.addItem("Кастомный")
             self.ui.customBtn.setText("Изменить кастомный алгоритм")
@@ -107,18 +118,44 @@ class KeyManager(QMainWindow):
 
         self.ui.newKeyBtn.clicked.connect(self.open_key_editor)
 
+    def reliability_check(self):
+        self.new_window = QtWidgets.QDialog()
+        self.reliability_window = Reliability()
+        self.reliability_window.setupUi(self.new_window)
+        self.reliability_window.mngBtn.clicked.connect(self.open_main_page)
+
+        result = str(self.user.data.reliability_check())
+        if result is not None:
+            result = result.replace("number_flag", "наличие цифр")
+            result = result.replace("upper_flag", "наличие символов в верхнем регистре")
+            result = result.replace("lower_flag", "наличие символов в нижнем регистре")
+            result = result.replace("special_flag", "наличие специальных символов")
+            result = result.replace("time", "время подбора")
+            result = result.replace("length", "длина пароля")
+            words = result.split(', ')
+            msg = ''
+            for word in words:
+                msg += word + '\n'
+                if '}' in word:
+                    msg += '\n'
+
+            self.reliability_window.plainTextEdit.setPlainText(str(msg))
+
+        self.new_window.show()
+
     def open_custom(self):
         if not os.path.exists(f"{os.path.dirname(__file__)}\\custom\\custom.py"):
             with open(f"{os.path.dirname(__file__)}\\custom\\custom.py", "w") as f:
                 print(empty_custom, file=f)
-                self.ui.customBtn.setText("Изменить кастомный алгоритм")
+            self.ui.customBtn.setText("Изменить кастомный алгоритм")
+            self.ui.modelEdit.addItem("Кастомный")
         subprocess.Popen(f'explorer /select, "{os.path.dirname(__file__)}\\custom\\custom.py"')
 
     def open_support_window(self):
         self.new_window = QtWidgets.QDialog()
-        self.ui_window = Support()
-        self.ui_window.setupUi(self.new_window)
-        self.ui_window.sendBtn.clicked.connect(self.send_support_msg)
+        self.support_window = Support()
+        self.support_window.setupUi(self.new_window)
+        self.support_window.sendBtn.clicked.connect(self.send_support_msg)
 
         self.new_window.show()
 
@@ -127,7 +164,7 @@ class KeyManager(QMainWindow):
         if self.user.code_chck:
             status, msg = self.user.registration(self.ui.createPss.text(), self.ui.confPss.text(), mode)
             if status:
-                self.ui.login.setText(str(self.user.user_data.login))
+                self.ui.login.setText(str(self.user.data.login))
                 self.open_login_window()
             else:
                 warning_notification(msg)
@@ -147,15 +184,15 @@ class KeyManager(QMainWindow):
         if not status:
             warning_notification(msg)
         else:
-            write_current_user(self.user.user_data.login, self.chg_pss_window.pss.text())
+            write_current_user(self.user.data.login, self.chg_pss_window.pss.text())
             self.new_window.close()
 
     def send_support_msg(self):
-        if self.ui_window.textEdit.toPlainText() != "":
-            if self.ui_window.themeEdit.currentIndex() != -1:
-                self.user.mail.send_email(self.ui_window.textEdit.toPlainText() +
-                                          f"\n\nFrom {self.user.user_data.login}",
-                                          self.ui_window.themeEdit.currentText(), "support")
+        if self.support_window.textEdit.toPlainText() != "":
+            if self.support_window.themeEdit.currentIndex() != -1:
+                self.user.mail.send_email(self.support_window.textEdit.toPlainText() +
+                                          f"\n\nFrom {self.user.data.login}",
+                                          self.support_window.themeEdit.currentText(), "support")
             else:
                 warning_notification("Выберите тему обращения")
         else:
@@ -173,8 +210,37 @@ class KeyManager(QMainWindow):
             self.ui.mainPage.setMaximumSize(max, max)
         elif sender == "settingBtn":
             self.ui.settings.setMaximumSize(max, max)
-        else:
+        elif sender == "managerBtn":
             self.ui.passwordManager.setMaximumSize(max, max)
+        else:
+            self.new_window.close()
+            self.ui.passwordManager.setMaximumSize(max, max)
+
+    def open_url(self):
+        sender = self.sender().objectName()
+        if sender == "readBtn":
+            webbrowser.open(self.link_1)
+        elif sender == "readBtn2":
+            webbrowser.open(self.link_2)
+        elif sender == "readBtn3":
+            webbrowser.open("https://habr.com/ru/companies/globalsign/articles/697708/")
+        elif sender == "moreBtn":
+            webbrowser.open("https://habr.com/ru/companies/cloud4y/articles/347952/")
+
+    def get_news(self):
+        news, links, authors = self.user.data.get_last_news()
+        if news[0] is not None and links[0] is not None and authors[0] is not None:
+            self.ui.newsTitle.setPlainText(news[0])
+            self.ui.from1.setText(authors[0])
+            self.link_1 = links[0]
+            if news[1] is not None and links[1] is not None and authors[1] is not None:
+                self.ui.newsTitle2.setPlainText(news[1])
+                self.ui.from2.setText(authors[1])
+                self.link_2 = links[1]
+        else:
+            self.link_1 = "https://habr.com/ru/companies/dataline/articles/563228/"
+            self.link_2 = "https://habr.com/ru/articles/336578/"
+
 
     def close_key_editor(self):
         self.ui.tableWidget.clearSelection()
@@ -219,7 +285,7 @@ class KeyManager(QMainWindow):
                     'title': f'{self.ui.titleEdit.text()}',
                     'collection': f'{self.col}'
                 }
-                self.user.user_data.create_key(data)
+                self.user.data.create_key(data)
                 self.close_key_editor()
                 self.view_data()
 
@@ -229,14 +295,14 @@ class KeyManager(QMainWindow):
             'title': f'{self.ui.titleEdit.text()}',
             'collection': f'{self.col}'
         }
-        self.user.user_data.update_existing_key(self.current_id, new_data)
+        self.user.data.update_existing_key(self.current_id, new_data)
         self.close_key_editor()
         self.view_data()
 
     def delete_current_key(self):
         if len(self.ui.tableWidget.selectedItems()) > 0:
             index = self.ui.tableWidget.selectedItems()[0].row()
-            self.user.user_data.delete_key(self.keys[index]['id'])
+            self.user.data.delete_key(self.keys[index]['id'])
             self.close_key_editor()
             self.view_data()
         else:
@@ -320,7 +386,7 @@ class KeyManager(QMainWindow):
 
     def send_code(self):
         email = self.ui.email.text()
-        self.user.user_data.login = email
+        self.user.data.login = email
         status, msg = self.user.send_code(email)
         if not status:
             warning_notification(msg)
@@ -363,7 +429,7 @@ class KeyManager(QMainWindow):
     def view_data(self):
         col = self.col
         if col is not None:
-            self.keys = self.user.user_data.get_all_docs()
+            self.keys = self.user.data.get_all_docs()
 
             row = 0
             self.ui.tableWidget.setRowCount(len(self.keys))
@@ -375,25 +441,25 @@ class KeyManager(QMainWindow):
     def quit(self):
         write_current_user('', '')
         self.col = None
-        self.user.user_data.login = ''
+        self.user.data.login = ''
         self.current_id = None
         self.get_current_user()
 
     def download_data(self):
-        data = self.user.user_data.get_all_docs()
+        data = self.user.data.get_all_docs()
         msg = "Список паролей:\n"
 
         for key in data:
             msg += f'Название: {key["title"]}, Пароль: {key["password"]}\n'
 
-        self.user.mail.send_email(msg, "Выгрузка паролей", self.user.user_data.login)
+        self.user.mail.send_email(msg, "Выгрузка паролей", self.user.data.login)
 
     def delete_account(self):
         self.download_data()
         for key in self.keys:
-            self.user.user_data.delete_key(key['id'])
+            self.user.data.delete_key(key['id'])
 
-        self.user.user_data.delete_user()
+        self.user.data.delete_user()
         self.quit()
 
 

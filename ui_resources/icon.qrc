@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="pics">
+    <file>res/image.png</file>
     <file>res/x-circle.svg</file>
     <file>res/key.svg</file>
     <file>res/home.svg</file>
