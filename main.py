@@ -479,10 +479,10 @@ class KeyManager(QMainWindow):
 def __init():
     if not QtWidgets.QApplication.instance():
         app = QtWidgets.QApplication(sys.argv)
+        window = KeyManager(app)
+        window.show()
     else:
         app = QtWidgets.QApplication.instance()
-    window = KeyManager(app)
-    window.show()
 
     sys.exit(app.exec())
 
