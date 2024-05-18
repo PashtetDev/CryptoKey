@@ -25,8 +25,6 @@ def update():
         with open(os.path.dirname(__file__) + "\\libs\\data\\current_user", 'r') as f:
             cur_user = f.read()
 
-        print(cur_user)
-
         if os.path.exists(dir_name + "\\libs"):
             shutil.rmtree(dir_name + "\\libs")
         if os.path.exists(dir_name + "\\main.py"):

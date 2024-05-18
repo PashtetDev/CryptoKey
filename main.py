@@ -140,7 +140,7 @@ class KeyManager(QMainWindow):
         self.ui.newKeyBtn.clicked.connect(self.open_key_editor)
 
     def update(self):
-        updater.update(self, self.app)
+        updater.update()
 
     def reliability_check(self):
         self.new_window = QtWidgets.QDialog()
