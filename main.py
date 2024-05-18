@@ -37,6 +37,17 @@ def warning_notification(msg):
                                 msg, QtWidgets.QMessageBox.Cancel)
 
 
+def singleton(cls):
+    instances = {}
+
+    def wrapper(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return wrapper
+
+
+@singleton
 class KeyManager(QMainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self)
@@ -476,16 +487,13 @@ class KeyManager(QMainWindow):
         self.quit()
 
 
-window = None
-
-
 def __init():
     if not QtWidgets.QApplication.instance():
         app = QtWidgets.QApplication(sys.argv)
-        window = KeyManager(app)
     else:
         app = QtWidgets.QApplication.instance()
 
+    window = KeyManager(app)
     window.show()
     sys.exit(app.exec())
 
