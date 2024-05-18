@@ -12,17 +12,7 @@ dir_name = os.path.dirname(__file__)
 file_path = dir_name + "\\Crypto.zip"
 
 
-def update(window, app):
-    try:
-        import main
-        try:
-            app.quit()
-        except AttributeError:
-            print("Что-то пошло не так O.O")
-    except ModuleNotFoundError:
-        print("Что-то пошло не так O.O")
-
-
+def update():
     response = requests.get(url)
     if response.status_code == 200:
         with open(file_path, 'wb') as file:
@@ -31,6 +21,11 @@ def update(window, app):
         with zipfile.ZipFile(file_path, 'r') as zip_ref:
             zip_ref.extractall(dir_name)
         os.remove(file_path)
+
+        with open(os.path.dirname(__file__) + "\\libs\\data\\current_user", 'r') as f:
+            cur_user = f.read()
+
+        print(cur_user)
 
         if os.path.exists(dir_name + "\\libs"):
             shutil.rmtree(dir_name + "\\libs")
@@ -43,6 +38,9 @@ def update(window, app):
         shutil.move(source + "\\main.py", destination + "\\main.py")
         shutil.rmtree(source)
 
+        with open(os.path.dirname(__file__) + "\\libs\\data\\current_user", 'w') as f:
+            print(cur_user, file=f)
+
     open_main()
 
 
@@ -50,7 +48,7 @@ def open_main():
     try:
         import main
         try:
-            main.__init()
+            main.restart()
         except AttributeError:
             print("Что-то пошло не так O.O")
     except ModuleNotFoundError:

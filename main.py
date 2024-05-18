@@ -487,7 +487,11 @@ class KeyManager(QMainWindow):
         self.quit()
 
 
-def __init():
+def restart():
+    os.execv(sys.executable, ['python'] + sys.argv)
+
+
+if __name__ == "__main__":
     if not QtWidgets.QApplication.instance():
         app = QtWidgets.QApplication(sys.argv)
     else:
@@ -496,7 +500,3 @@ def __init():
     window = KeyManager(app)
     window.show()
     sys.exit(app.exec())
-
-
-if __name__ == "__main__":
-    __init()
