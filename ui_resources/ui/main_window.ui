@@ -253,46 +253,24 @@ border: 2px solid white;
 #label_4, #newsTitle, #newsTitle2{
 padding: 5px;
 }
-#custBtn{
-margin-left: 7px;
-background-color: #57b8ff;
-padding: 5px;
-border-radius: 10px;
-}
-#custBtn:hover{
-margin-left: 7px;
-background-color: #1789fc;
-padding: 5px;
-border-radius: 10px;
-}
-#custBtn:pressed{
-margin-left: 7px;
-background-color: #296eb4;
-padding: 5px;
-border-radius: 10px;
-}
-#checkBtn, #readBtn, #checkBtn, #readBtn2, #readBtn3{
+#checkBtn, #readBtn, #checkBtn, #readBtn2, #readBtn3, #custBtn{
 margin-left: 7px;
 background-color: #088572;
 padding: 5px;
 border-radius: 10px;
 }
-#checkBtn:hover, #readBtn2:hover, #readBtn3:hover, #readBtn:hover{
+#checkBtn:hover, #readBtn2:hover, #readBtn3:hover, #readBtn:hover, #custBtn:hover{
 background-color:#173B49;
 padding: 5px;
 border-radius: 10px;
 }
-#checkBtn:pressed, #readBtn2:pressed, #readBtn3:pressed, #readBtn:pressed{
+#checkBtn:pressed, #readBtn2:pressed, #readBtn3:pressed, #readBtn:pressed, #custBtn:pressed{
 background-color:  #0D0D15;
 padding: 5px;
 border-radius: 10px;
 }
 
-#custom{
-background-color: qlineargradient(spread:pad, x-1:1, y1:0, x2:1, y2:2, stop:0 #a8dcd1, stop:0.3 #65def1, stop:1 #65def1);
-border-radius: 10px;
-}
-#header{
+#custom, #header{
 background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:2, stop:0 #088572, stop:0.15 #088572, stop:0.5 #173B49, stop:1 #173B49);
 border-radius: 10px;
 }

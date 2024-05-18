@@ -344,6 +344,7 @@ class KeyManager(QMainWindow):
             elif model == 'Сильный':
                 pss = crypto.strong_alg(input_str)
             elif model == 'Кастомный':
+                from custom import custom
                 pss = custom.custom_alg(input_str)
             else:
                 pss = input_str

@@ -94,47 +94,25 @@ class Ui_MainWindow(object):
 "#label_4, #newsTitle, #newsTitle2{\n"
 "padding: 5px;\n"
 "}\n"
-"#custBtn{\n"
-"margin-left: 7px;\n"
-"background-color: #57b8ff;\n"
-"padding: 5px;\n"
-"border-radius: 10px;\n"
-"}\n"
-"#custBtn:hover{\n"
-"margin-left: 7px;\n"
-"background-color: #1789fc;\n"
-"padding: 5px;\n"
-"border-radius: 10px;\n"
-"}\n"
-"#custBtn:pressed{\n"
-"margin-left: 7px;\n"
-"background-color: #296eb4;\n"
-"padding: 5px;\n"
-"bord"
-                        "er-radius: 10px;\n"
-"}\n"
-"#checkBtn, #readBtn, #checkBtn, #readBtn2, #readBtn3{\n"
+"#checkBtn, #readBtn, #checkBtn, #readBtn2, #readBtn3, #custBtn{\n"
 "margin-left: 7px;\n"
 "background-color: #088572;\n"
 "padding: 5px;\n"
 "border-radius: 10px;\n"
 "}\n"
-"#checkBtn:hover, #readBtn2:hover, #readBtn3:hover, #readBtn:hover{\n"
+"#checkBtn:hover, #readBtn2:hover, #readBtn3:hover, #readBtn:hover, #custBtn:hover{\n"
 "background-color:#173B49;\n"
 "padding: 5px;\n"
 "border-radius: 10px;\n"
 "}\n"
-"#checkBtn:pressed, #readBtn2:pressed, #readBtn3:pressed, #readBtn:pressed{\n"
+""
+                        "#checkBtn:pressed, #readBtn2:pressed, #readBtn3:pressed, #readBtn:pressed, #custBtn:pressed{\n"
 "background-color:  #0D0D15;\n"
 "padding: 5px;\n"
 "border-radius: 10px;\n"
 "}\n"
 "\n"
-"#custom{\n"
-"background-color: qlineargradient(spread:pad, x-1:1, y1:0, x2:1, y2:2, stop:0 #a8dcd1, stop:0.3 #65def1, stop:1 #65def1);\n"
-"border-radius: 10px;\n"
-"}\n"
-"#header{\n"
+"#custom, #header{\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:2, stop:0 #088572, stop:0.15 #088572, stop:0.5 #173B49, stop:1 #173B49);\n"
 "border-radius: 10px;\n"
 "}\n"
@@ -146,8 +124,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#centralWidget{\n"
-"background-color: #"
-                        "0D0D15;\n"
+"background-color: #0D0D15;\n"
 "}\n"
 "\n"
 "#closeEditor{\n"
@@ -172,7 +149,8 @@ class Ui_MainWindow(object):
 "border-radius: 30px;\n"
 "}\n"
 "\n"
-"#mainBody > QLineEdit, #mainBody_2 > QLineEdit, #email{\n"
+"#mainBody > QLineEdit, #mainBody_"
+                        "2 > QLineEdit, #email{\n"
 "background-color: #0D0D15;\n"
 "padding: 5px;\n"
 "border-radius: 10px;\n"
@@ -189,8 +167,7 @@ class Ui_MainWindow(object):
 "border-radius: 10px;\n"
 "}\n"
 "\n"
-"#mainBody > QPushButton:pressed, #signupBtn:pressed, #mainBody_2 > "
-                        "QPushButton:pressed, #saveBtn:pressed, #generateBtn:pressed{\n"
+"#mainBody > QPushButton:pressed, #signupBtn:pressed, #mainBody_2 > QPushButton:pressed, #saveBtn:pressed, #generateBtn:pressed{\n"
 "border: 3px solid #0D0D15;\n"
 "font-weight: bold;\n"
 "background-color:#0D0D15;\n"
@@ -214,7 +191,8 @@ class Ui_MainWindow(object):
 "background-color: transparent;\n"
 "border: 5px solid white;\n"
 "border-radius: 40px\n"
-"}\n"
+""
+                        "}\n"
 "\n"
 "QTableWidget {\n"
 "margin-left: 10px;\n"
@@ -246,8 +224,7 @@ class Ui_MainWindow(object):
 "border: 2px solid  #088572;\n"
 "}\n"
 "\n"
-"#menuPanel > QWid"
-                        "get > QPushButton{\n"
+"#menuPanel > QWidget > QPushButton{\n"
 "text-align :left;\n"
 "background-color: #088572;\n"
 "padding:5;\n"
@@ -266,7 +243,8 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#menuPanel > QWidget > QPushButton:focus{\n"
-"border-left: 3px solid #25CD85;\n"
+"border"
+                        "-left: 3px solid #25CD85;\n"
 "font-weight: bold;\n"
 "padding-left:7px;\n"
 "background-color: #0D0D15;\n"
@@ -290,8 +268,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#buttons > QPushButton, #buttons_2 > QPushButton{\n"
-"text-align: left"
-                        ";\n"
+"text-align: left;\n"
 "padding:5;\n"
 "}\n"
 "\n"
@@ -449,15 +426,6 @@ class Ui_MainWindow(object):
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_4.addItem(self.verticalSpacer)
-
-        self.tgbotBtn = QPushButton(self.menuPanel)
-        self.tgbotBtn.setObjectName(u"tgbotBtn")
-        sizePolicy5.setHeightForWidth(self.tgbotBtn.sizePolicy().hasHeightForWidth())
-        self.tgbotBtn.setSizePolicy(sizePolicy5)
-        self.tgbotBtn.setFont(font2)
-        self.tgbotBtn.setCursor(QCursor(Qt.PointingHandCursor))
-
-        self.verticalLayout_4.addWidget(self.tgbotBtn, 0, Qt.AlignHCenter)
 
         self.versionLabel = QLabel(self.menuPanel)
         self.versionLabel.setObjectName(u"versionLabel")
@@ -1338,7 +1306,6 @@ class Ui_MainWindow(object):
         self.mainBtn.setText(QCoreApplication.translate("MainWindow", u"\u0413\u043b\u0430\u0432\u043d\u0430\u044f", None))
         self.managerBtn.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u043f\u0430\u0440\u043e\u043b\u0435\u0439", None))
         self.settingBtn.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
-        self.tgbotBtn.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043b\u0435\u0433\u0440\u0430\u043c \u0431\u043e\u0442", None))
         self.versionLabel.setText(QCoreApplication.translate("MainWindow", u"v1.012.123.123", None))
         self.updateBtn.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u043f\u0430\u0440\u043e\u043b\u0435\u0439", None))
