@@ -6,7 +6,7 @@ from libs.ui.confirm_ui import Ui_Dialog as Confirm
 from libs.ui.reliability_ui import Ui_Dialog as Reliability
 from libs.ui.change_pss_ui import Ui_Dialog as ChangePss
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QMainWindow
 from libs import crypto
 from libs.account import Account
 import subprocess
@@ -476,14 +476,17 @@ class KeyManager(QMainWindow):
         self.quit()
 
 
+window = None
+
+
 def __init():
     if not QtWidgets.QApplication.instance():
         app = QtWidgets.QApplication(sys.argv)
         window = KeyManager(app)
-        window.show()
     else:
         app = QtWidgets.QApplication.instance()
 
+    window.show()
     sys.exit(app.exec())
 
 
