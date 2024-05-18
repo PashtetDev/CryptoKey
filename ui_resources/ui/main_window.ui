@@ -427,18 +427,18 @@ padding-left:7px;
 background-color: #0D0D15;
 }
 
-#tgbotBtn{
+#tgbotBtn, #updateBtn{
 text-align: center;
 width: 150px;
 padding: 5px 10px 5px 10px;
 }
 
-#tgbotBtn:hover{
+#tgbotBtn:hover, #updateBtn:hover{
 background-color: #173B49;
 border-radius: 10px;
 }
 
-#tgbotBtn:pressed{
+#tgbotBtn:pressed, #updateBtn:pressed{
 border: 3px solid #0D0D15;
 font-weight: bold;
 background-color:#0D0D15;
@@ -805,7 +805,7 @@ padding-bottom:10px;
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignHCenter">
+          <item>
            <widget class="QLabel" name="versionLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -818,6 +818,19 @@ padding-bottom:10px;
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+           <widget class="QPushButton" name="updateBtn">
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Обновить приложение</string>
             </property>
            </widget>
           </item>

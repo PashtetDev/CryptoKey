@@ -11,6 +11,7 @@ from libs import crypto
 from libs.account import Account
 import subprocess
 import webbrowser
+import updater
 
 try:
     import custom.custom as custom
@@ -37,8 +38,9 @@ def warning_notification(msg):
 
 
 class KeyManager(QMainWindow):
-    def __init__(self):
+    def __init__(self, app):
         QMainWindow.__init__(self)
+        self.app = app
         self.link_2 = None
         self.link_1 = None
         self.ui = Ui_MainWindow()
@@ -110,6 +112,14 @@ class KeyManager(QMainWindow):
         self.ui.moreBtn.clicked.connect(self.open_url)
         self.ui.checkBtn.clicked.connect(self.reliability_check)
 
+        if updater.get_new_version() > updater.get_cur_version():
+            self.ui.versionLabel.hide()
+            self.ui.updateBtn.clicked.connect(self.update)
+        else:
+            self.ui.updateBtn.hide()
+            with open(os.path.dirname(__file__)+"\\libs\\data\\config.txt") as f:
+                self.ui.versionLabel.setText(eval(f.read())['version'])
+
         if found:
             self.ui.modelEdit.addItem("Кастомный")
             self.ui.customBtn.setText("Изменить кастомный алгоритм")
@@ -117,6 +127,9 @@ class KeyManager(QMainWindow):
             self.ui.customBtn.setText("Создать кастомный алгоритм")
 
         self.ui.newKeyBtn.clicked.connect(self.open_key_editor)
+
+    def update(self):
+        updater.update(self, self.app)
 
     def reliability_check(self):
         self.new_window = QtWidgets.QDialog()
@@ -464,8 +477,11 @@ class KeyManager(QMainWindow):
 
 
 def __init():
-    app = QApplication(sys.argv)
-    window = KeyManager()
+    if not QtWidgets.QApplication.instance():
+        app = QtWidgets.QApplication(sys.argv)
+    else:
+        app = QtWidgets.QApplication.instance()
+    window = KeyManager(app)
     window.show()
 
     sys.exit(app.exec())

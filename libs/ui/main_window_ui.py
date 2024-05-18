@@ -272,30 +272,30 @@ class Ui_MainWindow(object):
 "background-color: #0D0D15;\n"
 "}\n"
 "\n"
-"#tgbotBtn{\n"
+"#tgbotBtn, #updateBtn{\n"
 "text-align: center;\n"
 "width: 150px;\n"
 "padding: 5px 10px 5px 10px;\n"
 "}\n"
 "\n"
-"#tgbotBtn:hover{\n"
+"#tgbotBtn:hover, #updateBtn:hover{\n"
 "background-color: #173B49;\n"
 "border-radius: 10px;\n"
 "}\n"
 "\n"
-"#tgbotBtn:pressed{\n"
+"#tgbotBtn:pressed, #updateBtn:pressed{\n"
 "border: 3px solid #0D0D15;\n"
 "font-weight: bold;\n"
 "background-color:#0D0D15;\n"
 "}\n"
 "\n"
 "#buttons > QPushButton, #buttons_2 > QPushButton{\n"
-"text-align: left;\n"
+"text-align: left"
+                        ";\n"
 "padding:5;\n"
 "}\n"
 "\n"
-" #buttons > QPushB"
-                        "utton:hover, #buttons_2 > QPushButton:hover{\n"
+" #buttons > QPushButton:hover, #buttons_2 > QPushButton:hover{\n"
 "text-align: left;\n"
 "border: 2px solid #173B49;\n"
 "padding:5;\n"
@@ -465,7 +465,13 @@ class Ui_MainWindow(object):
         self.versionLabel.setSizePolicy(sizePolicy2)
         self.versionLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_4.addWidget(self.versionLabel, 0, Qt.AlignHCenter)
+        self.verticalLayout_4.addWidget(self.versionLabel)
+
+        self.updateBtn = QPushButton(self.menuPanel)
+        self.updateBtn.setObjectName(u"updateBtn")
+        self.updateBtn.setMaximumSize(QSize(180, 16777215))
+
+        self.verticalLayout_4.addWidget(self.updateBtn, 0, Qt.AlignHCenter|Qt.AlignVCenter)
 
 
         self.horizontalLayout_6.addWidget(self.menuPanel)
@@ -1334,6 +1340,7 @@ class Ui_MainWindow(object):
         self.settingBtn.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.tgbotBtn.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043b\u0435\u0433\u0440\u0430\u043c \u0431\u043e\u0442", None))
         self.versionLabel.setText(QCoreApplication.translate("MainWindow", u"v1.012.123.123", None))
+        self.updateBtn.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u043f\u0430\u0440\u043e\u043b\u0435\u0439", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435", None));
