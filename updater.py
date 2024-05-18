@@ -58,10 +58,11 @@ def open_main():
 
 
 def get_cur_version():
-    if os.path.exists(dir_name + "\\libs\\data\\config.txt"):
-        with open(dir_name + "\\libs\\data\\config.txt", 'r') as file:
+    if os.path.exists(dir_name + "\\libs\\data\\config"):
+        with open(dir_name + "\\libs\\data\\config", 'r') as file:
             string = eval(file.read())
-            return int(string['version'].split('.')[3])
+            version = int(string['version'].split('.')[3])
+            return version
     else:
         return 0
 

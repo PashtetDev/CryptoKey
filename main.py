@@ -117,7 +117,7 @@ class KeyManager(QMainWindow):
             self.ui.updateBtn.clicked.connect(self.update)
         else:
             self.ui.updateBtn.hide()
-            with open(os.path.dirname(__file__)+"\\libs\\data\\config.txt") as f:
+            with open(os.path.dirname(__file__)+"\\libs\\data\\config") as f:
                 self.ui.versionLabel.setText(eval(f.read())['version'])
 
         if found:
