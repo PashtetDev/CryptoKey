@@ -27,13 +27,17 @@ def update():
 
         if os.path.exists(dir_name + "\\libs"):
             shutil.rmtree(dir_name + "\\libs")
+        if os.path.exists(dir_name + "\\ui_resources"):
+            shutil.rmtree(dir_name + "\\ui_resources")
         if os.path.exists(dir_name + "\\main.pyw"):
             os.remove(dir_name + "\\main.pyw")
 
         source = f"{dir_name}\\CryptoKey-master"
         destination = f"{dir_name}"
         shutil.move(source + "\\libs", destination)
+        shutil.move(source + "\\ui_resources", destination)
         shutil.move(source + "\\main.pyw", destination + "\\main.pyw")
+        shutil.move(source + "\\updater.py", destination + "\\updater_1.py")
         shutil.rmtree(source)
 
         with open(os.path.dirname(__file__) + "\\libs\\data\\current_user", 'w') as f:
