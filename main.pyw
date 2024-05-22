@@ -11,7 +11,6 @@ from libs import crypto
 from libs.account import Account
 import subprocess
 import webbrowser
-import updater
 
 try:
     import custom.custom as custom
@@ -37,6 +36,21 @@ def warning_notification(msg):
                                 msg, QtWidgets.QMessageBox.Cancel)
 
 
+def check_updater():
+    if os.path.exists(os.path.dirname(__file__)+"\\updater_1.py"):
+        if os.path.exists(os.path.dirname(__file__)+"\\updater.py"):
+            os.remove(os.path.dirname(__file__)+"\\updater.py")
+        os.rename(os.path.dirname(__file__)+"\\updater_1.py", os.path.dirname(__file__)+"\\updater.py")
+
+
+def _update():
+    try:
+        import updater
+        updater.update()
+    except Exception as ex:
+        print(ex)
+
+
 class KeyManager(QMainWindow):
     def __init__(self, app):
         QMainWindow.__init__(self)
@@ -45,6 +59,7 @@ class KeyManager(QMainWindow):
         self.link_1 = None
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        check_updater()
         self.object_connect()
         self.col = None
         self.current_id = None
@@ -112,12 +127,21 @@ class KeyManager(QMainWindow):
         self.ui.moreBtn.clicked.connect(self.open_url)
         self.ui.checkBtn.clicked.connect(self.reliability_check)
 
-        if updater.get_new_version() > updater.get_cur_version():
-            self.ui.versionLabel.hide()
-            self.ui.updateBtn.clicked.connect(self.update)
+        if os.path.exists(os.path.dirname(__file__)+"\\updater.py"):
+            try:
+                import updater
+                if updater.get_new_version() > updater.get_cur_version():
+                    self.ui.versionLabel.hide()
+                    self.ui.updateBtn.clicked.connect(_update)
+                else:
+                    self.ui.updateBtn.hide()
+                    with open(os.path.dirname(__file__) + "\\libs\\data\\config") as f:
+                        self.ui.versionLabel.setText(eval(f.read())['version'])
+            except Exception as ex:
+                print(ex)
         else:
             self.ui.updateBtn.hide()
-            with open(os.path.dirname(__file__)+"\\libs\\data\\config") as f:
+            with open(os.path.dirname(__file__) + "\\libs\\data\\config") as f:
                 self.ui.versionLabel.setText(eval(f.read())['version'])
 
         if found:
@@ -128,8 +152,6 @@ class KeyManager(QMainWindow):
 
         self.ui.newKeyBtn.clicked.connect(self.open_key_editor)
 
-    def update(self):
-        updater.update()
 
     def reliability_check(self):
         self.new_window = QtWidgets.QDialog()
