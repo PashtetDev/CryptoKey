@@ -47,7 +47,7 @@ def update():
 
 
 def open_main():
-    os.startfile(os.path.dirname(__file__) + "main.pyw")
+    os.startfile(os.path.dirname(__file__) + "\\main.pyw")
     sys.exit()
 
 
