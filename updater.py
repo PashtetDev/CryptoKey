@@ -47,11 +47,8 @@ def update():
 
 
 def open_main():
-    try:
-        os.startfile(os.path.dirname(__file__) + "main.pyw")
-        sys.exit()
-    except FileNotFoundError:
-        print("Что-то пошло не так O.O")
+    os.startfile(os.path.dirname(__file__) + "main.pyw")
+    sys.exit()
 
 
 def get_cur_version():
