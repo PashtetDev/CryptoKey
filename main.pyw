@@ -25,6 +25,7 @@ empty_custom = 'def custom_alg(string):\n'+\
 '   #########################################\n'+\
 '   return new_pss\n'
 
+
 def write_current_user(_login, pss):
     with open(f'{os.path.dirname(__file__)}\\libs\\data\\current_user', "w") as f:
         data = {'login': f'{_login}', 'password': f'{pss}'}
