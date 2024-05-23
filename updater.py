@@ -48,12 +48,9 @@ def update():
 
 def open_main():
     try:
-        import main
-        try:
-            main.restart()
-        except AttributeError:
-            print("Что-то пошло не так O.O")
-    except ModuleNotFoundError:
+        os.startfile(os.path.dirname(__file__) + "main.pyw")
+        sys.exit()
+    except FileNotFoundError:
         print("Что-то пошло не так O.O")
 
 
