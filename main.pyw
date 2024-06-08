@@ -14,16 +14,18 @@ import webbrowser
 
 try:
     import custom.custom as custom
+
     found = True
 except ModuleNotFoundError as err:
     found = False
 
-empty_custom = 'def custom_alg(string):\n'+\
-'   new_pss = string\n'+\
-'   #########################################\n\n'+\
-'   #Ваш кастомный алгоритм генерации пароля#\n\n'+\
-'   #########################################\n'+\
-'   return new_pss\n'
+empty_custom = 'def custom_alg(string):\n' + \
+               '   new_pss = string\n' + \
+               '   #########################################\n\n' + \
+               '   #Ваш кастомный алгоритм генерации пароля#\n\n' + \
+               '   #########################################\n' + \
+               '   return new_pss\n'
+
 
 
 def write_current_user(_login, pss):
@@ -34,14 +36,14 @@ def write_current_user(_login, pss):
 
 def warning_notification(msg):
     QtWidgets.QMessageBox.warning(None, "Warning!",
-                                msg, QtWidgets.QMessageBox.Cancel)
+                                  msg, QtWidgets.QMessageBox.Cancel)
 
 
 def check_updater():
-    if os.path.exists(os.path.dirname(__file__)+"\\updater_1.py"):
-        if os.path.exists(os.path.dirname(__file__)+"\\updater.py"):
-            os.remove(os.path.dirname(__file__)+"\\updater.py")
-        os.rename(os.path.dirname(__file__)+"\\updater_1.py", os.path.dirname(__file__)+"\\updater.py")
+    if os.path.exists(os.path.dirname(__file__) + "\\updater_1.py"):
+        if os.path.exists(os.path.dirname(__file__) + "\\updater.py"):
+            os.remove(os.path.dirname(__file__) + "\\updater.py")
+        os.rename(os.path.dirname(__file__) + "\\updater_1.py", os.path.dirname(__file__) + "\\updater.py")
 
 
 def _update():
@@ -128,10 +130,10 @@ class KeyManager(QMainWindow):
         self.ui.moreBtn.clicked.connect(self.open_url)
         self.ui.checkBtn.clicked.connect(self.reliability_check)
 
-        if os.path.exists(os.path.dirname(__file__)+"\\updater.py"):
+        if os.path.exists(os.path.dirname(__file__) + "\\updater.py"):
             try:
                 import updater
-                if updater.get_new_version() > updater.get_cur_version():
+                if updater.check_update():
                     self.ui.versionLabel.hide()
                     self.ui.updateBtn.clicked.connect(_update)
                 else:
@@ -152,7 +154,6 @@ class KeyManager(QMainWindow):
             self.ui.customBtn.setText("Создать кастомный алгоритм")
 
         self.ui.newKeyBtn.clicked.connect(self.open_key_editor)
-
 
     def reliability_check(self):
         self.new_window = QtWidgets.QDialog()
@@ -276,7 +277,6 @@ class KeyManager(QMainWindow):
         else:
             self.link_1 = "https://habr.com/ru/companies/dataline/articles/563228/"
             self.link_2 = "https://habr.com/ru/articles/336578/"
-
 
     def close_key_editor(self):
         self.ui.tableWidget.clearSelection()
